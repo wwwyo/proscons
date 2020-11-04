@@ -39,32 +39,32 @@
         </div>
         <div class="col-9" style="height: 100vh;">
           <div style="height: 80%; overflow: scroll;">
-            <div class="mt-5 border-bottom"style="width:100%;">
-              <div style="line-height: 2px;">
-                <p style="font-size: 20px;"><strong>大阪都構想について</strong></p>
-                <p style="font-size: 10px;">投票数：30票</p>
-                <p style="font-size: 10px;">作成日：2020-11-31</p>
+            <form class="mt-5">
+              <div class="form-group" style="line-height: 8px">
+                <label for="title" style="font-size: 20px;">タイトル  <span class="badge badge-danger mb-0">必須</span></label>
+                <input class="form-control form-control-lg" if="title" type="text" placeholder="例）大学生の進路について">
               </div>
-              <div class="my-1">
-                <button type="button" class="btn btn-outline-info">#選挙</button>
-                <button type="button" class="btn btn-outline-info">#大阪</button>
+              <div class="form-group mt-5" style="line-height: 8px">
+                <label for="explanation" style="font-size: 20px;">説明</label>
+                <textarea class="form-control" id="explanation" rows="3" placeholder="例）大学を休学して夢を追いかけることについて"></textarea>
               </div>
-              <div >
-                <button class="btn btn-outline-dark pl-0"style="border: none; font-size: 20px;">
-                  <b>投票する</b>
-                </button>
+              <div class="form-group mt-5" style="line-height: 8px">
+                <label for="tag" style="font-size: 20px;">ハッシュタグ</label>
+                  <div class="input-group-prepend" style="width: 100%;">
+                    <div class="input-group-text">#</div>
+                    <input type="text" class="form-control" id="tag" placeholder="一つずつ入力">
+                  </div>
               </div>
-            </div>
+            </form>
           </div>
-          <div class="container  btn btn-outline-danger" style="height: 20%;">
-            <div class="p-5"style="font-size: 200%">
-              投票を作る
+          <div class="container  btn btn-outline-success" style="height: 20%;">
+            <div type="submit" class="p-5" style="font-size: 200%">
+              投票作成
             </div>
           </div>
         </div>
       </div>
     </div>
-    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
