@@ -19,11 +19,11 @@
 
 ## ballot_boxes table
 
-| Column      | Type          | Options                         |
-| ----------- | ------------- | ------------------------------- |
-| title       | string        | null: false                     |
-| explanation | text          |                                 |
-| user_id     | references    | null: false, foreign_key: true  |
+| Column   | Type          | Options                         |
+| -------- | ------------- | ------------------------------- |
+| question | string        | null: false                     |
+| detail   | text          |                                 |
+| user_id  | references    | null: false, foreign_key: true  |
 
 ### Association
 
