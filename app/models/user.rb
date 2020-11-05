@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :ballot_boxes
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :nickname, presence: true
