@@ -1,7 +1,8 @@
 class CreateBallotTags < ActiveRecord::Migration[6.0]
   def change
     create_table :ballot_tags do |t|
-
+      t.references :ballot_box, null: false, foreign_key: true
+      t.references :tag, null: false, foreign_key: true
       t.timestamps
     end
   end
