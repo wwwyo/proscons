@@ -4,17 +4,24 @@
     <div class="col-9" style="height: 100vh;">
       <div style="height: 85%; overflow: scroll;">
         <%= form_with model: @ballot_form, url: ballot_boxes_path, local: true do |f| %>
-          <div class="form-group mt-5" style="line-height: 8px">
-            <%= f.label :question, 'タイトル', style:"font-size: 20px;"%><span class="badge badge-danger ml-2 mt-3">必須</span>
+          <div class="mt-5">
+            <%= render "share/errors_messages", model: f.object %>
+          </div>
+          <div class="form-group mt-5" style="line-height: 100%">
+            <div class="d-flex">
+              <%= f.label :question, 'タイトル', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">必須</span>
+            </div>
             <%= f.text_field :question, class: "form-control form-control-lg", id:"question", placeholder: "質問タイトル" %>
           </div>
-          <div class="form-group mt-5" style="line-height: 8px">
-            <%= f.label :detail, '詳細', style:"font-size: 20px;" %>
+          <div class="form-group mt-5" style="line-height: 100%;">
+            <%= f.label :detail, '詳細', style:"font-size: 200%;" %>
             <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文"%>
           </div>
-          <div class="form-group mt-5" style="line-height: 8px">
-            <%= f.label :name, 'ハッシュタグ', style:"font-size: 20px;" %><span class="badge badge-danger ml-2 mt-3">必須</span>
-            <div class="input-group-prepend" style="width: 100%;">
+          <div class="form-group mt-5" style="line-height: 100%;">
+            <div class="d-flex">
+              <%= f.label :name, 'ハッシュタグ', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">必須</span>
+            </div>
+            <div class="input-group-prepend">
               <div class="input-group-text">#</div>
               <%= f.text_field :name, class:"form-control", id:"tag", placeholder:"1つずつ入力"%>
             </div>
