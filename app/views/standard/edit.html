@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" style="height: 100vh; width: 100vw;">
+        <div class="col-3 border-right">
+          <div class="container" style="height: 100%;">
+            <div class="mt-3 d-flex align-items-center border-bottom btn pl-0" style="width: 100%; height: 8%;">
+              <a data-toggle="dropdown" href="#"style="color:black; font-size:20px;">ユーザーネーム</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">ログアウト</a>
+                <a class="dropdown-item" href="#">詳細</a>
+                <a class="dropdown-item" href="#">設定</a>
+              </div>
+            </div>
+            <div class="d-flex align-items-center btn mt-5 pl-0 border-bottom" style="width: 100%; height: 8%;">
+              <a href="#" style="color:black;font-size:20px">投票する</a>
+            </div>
+            <div class="side-main mt-5 pt-4" style="height: 70%; overflow: scroll;">
+              <div style="font-size:20px">チャンネル</div>
+              <div class="list-group " style="list-style: none; font-size: 12px; ">
+                <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">▶︎大阪都構想について</a>
+                <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">▶︎今日の夕食について</a>
+                <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">▶︎大学へ進学か就職か</a>
+                <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#"exit>▶︎恋人について</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-9" style="height: 100vh;">
+          <div style="height: 80%; overflow: scroll;">
+            <form class="mt-5">
+              <div class="form-group" style="line-height: 8px">
+                <label for="title" style="font-size: 20px;">タイトル  <span class="badge badge-danger mb-0">必須</span></label>
+                <input class="form-control form-control-lg" if="title" type="text" placeholder="例）大学生の進路について">
+              </div>
+              <div class="form-group mt-5" style="line-height: 8px">
+                <label for="explanation" style="font-size: 20px;">説明</label>
+                <textarea class="form-control" id="explanation" rows="3" placeholder="例）大学を休学して夢を追いかけることについて"></textarea>
+              </div>
+              <div class="form-group mt-5" style="line-height: 8px">
+                <label for="tag" style="font-size: 20px;">ハッシュタグ</label>
+                  <div class="input-group-prepend" style="width: 100%;">
+                    <div class="input-group-text">#</div>
+                    <input type="text" class="form-control" id="tag" placeholder="一つずつ入力">
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="container  btn btn-outline-primary" style="height: 20%;">
+            <div type="submit" class="p-5" style="font-size: 200%">
+              変更する
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
