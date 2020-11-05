@@ -3,29 +3,25 @@
     <%= render "share/side_content"%>
     <div class="col-9" style="height: 100vh;">
       <div style="height: 85%; overflow: scroll;">
-        <form class="mt-5">
-          <div class="form-group" style="line-height: 8px">
-            <label for="question" style="font-size: 20px;">タイトル  <span class="badge badge-danger mb-0">必須</span></label>
-            <input class="form-control form-control-lg" id="question" type="text" placeholder="質問タイトル">
+        <%= form_with model: @ballot_form, url: ballot_boxes_path, local: true do |f| %>
+          <div class="form-group mt-5" style="line-height: 8px">
+            <%= f.label :question, 'タイトル', style:"font-size: 20px;"%><span class="badge badge-danger ml-2 mt-3">必須</span>
+            <%= f.text_field :question, class: "form-control form-control-lg", id:"question", placeholder: "質問タイトル" %>
           </div>
           <div class="form-group mt-5" style="line-height: 8px">
-            <label for="detail" style="font-size: 20px;">詳細</label>
-            <textarea class="form-control" id="detail" rows="3" placeholder="質問本文"></textarea>
+            <%= f.label :detail, '詳細', style:"font-size: 20px;" %>
+            <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文"%>
           </div>
           <div class="form-group mt-5" style="line-height: 8px">
-            <label for="tag" style="font-size: 20px;">ハッシュタグ</label>
-              <div class="input-group-prepend" style="width: 100%;">
-                <div class="input-group-text">#</div>
-                <input type="text" class="form-control" id="tag" placeholder="一つずつ入力">
-              </div>
+            <%= f.label :name, 'ハッシュタグ', style:"font-size: 20px;" %><span class="badge badge-danger ml-2 mt-3">必須</span>
+            <div class="input-group-prepend" style="width: 100%;">
+              <div class="input-group-text">#</div>
+              <%= f.text_field :name, class:"form-control", id:"tag", placeholder:"1つずつ入力"%>
+            </div>
           </div>
-        </form>
-      </div>
-      <div class="container  btn btn-outline-success d-flex justify-content-center align-items-center" style="height: 15%;">
-        <div type="submit" class="p-5" style="font-size: 200%">
-          投票作成
         </div>
-      </div>
+        <%= f.submit '投票作成', class:"container  btn btn-outline-success d-flex justify-content-center align-items-center", style:"height: 15%; font-size: 200%;" %>
+      <% end %>
     </div>
   </div>
 </div>
