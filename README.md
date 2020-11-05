@@ -35,9 +35,9 @@
 
 ## tags table
 
-| Column | Type   | Options                       |
-| ------ | ------ | ----------------------------- |
-| name   | string | null: false, uniqueness: true |
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| name   | string | null: false |
 
 ### Association
 
