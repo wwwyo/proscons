@@ -1,0 +1,2 @@
+class BallotBox < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class BallotTag < ApplicationRecord
+end
