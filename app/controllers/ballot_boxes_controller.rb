@@ -22,10 +22,15 @@ class BallotBoxesController < ApplicationController
 
   def show
     @ballot_box = BallotBox.find(params[:id])
-    @tags = BallotTag.where(ballot_box_id: @ballot_box.id)
+    @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
   end
 
   def edit
+    @ballot_box = BallotBox.find(params[:id])
+    @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
+  end
+
+  def update
   end
 
   def destroy
