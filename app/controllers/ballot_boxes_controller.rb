@@ -29,6 +29,12 @@ class BallotBoxesController < ApplicationController
   end
 
   def destroy
+    ballot_box = BallotBox.find(params[:id])
+    if ballot_box.destroy
+      redirect_to ballot_boxes_path
+    else
+      render :show
+    end
   end
 
   private
