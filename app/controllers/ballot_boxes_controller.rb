@@ -21,6 +21,8 @@ class BallotBoxesController < ApplicationController
   end
 
   def show
+    @ballot_box = BallotBox.find(params[:id])
+    @tags = BallotTag.where(ballot_box_id: @ballot_box.id)
   end
 
   private
