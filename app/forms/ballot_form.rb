@@ -10,7 +10,8 @@ class BallotForm
 
   def save
     ballot_box = BallotBox.create(question: question, detail: detail, user_id: user_id)
-    tag = Tag.create(name: name)
+    tag = Tag.where(name: name).first_or_initialize
+    tag.save
     BallotTag.create(ballot_box_id: ballot_box.id, tag_id: tag.id)
   end
 end
