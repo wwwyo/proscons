@@ -24,8 +24,8 @@
             </div>
           </fieldset>
           <% if current_user.id == @ballot_box.user_id %>
-            <a class="btn btn-danger mt-5" href="#" role="button" style="width: 100%;">編集する</a>
-            <a class="btn btn-secondary mt-1" href="#" role="button" style="width: 100%;">削除する</a> 
+            <%= link_to "編集する", edit_ballot_box_path(@ballot_box), class:"btn btn-danger mt-5", style: "width: 100%;" %>
+            <%= link_to "削除する", ballot_box_path(@ballot_box), method: :delete, class:"btn btn-secondary mt-1", style:"width: 100%;" %>
           <% end %>
         </form>
       </div>

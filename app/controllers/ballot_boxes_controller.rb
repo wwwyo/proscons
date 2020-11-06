@@ -25,6 +25,12 @@ class BallotBoxesController < ApplicationController
     @tags = BallotTag.where(ballot_box_id: @ballot_box.id)
   end
 
+  def edit
+  end
+
+  def destroy
+  end
+
   private
   
   def ballot_params
