@@ -3,26 +3,29 @@
     <%= render "share/side_content" %>
     <div class="col-9" style="height: 100vh;">
       <div style="height: 85%; overflow: scroll;">
-        <div class="mt-5 border-bottom"style="width:100%;">
-          <div style="line-height: 2px;">
-            <p style="font-size: 20px;"><strong>大阪都構想について</strong></p>
-            <p style="font-size: 10px;">投票数：30票</p>
-            <p style="font-size: 10px;">作成日：2020-11-31</p>
+        <% @ballot_boxes.each do |ballot_box| %>
+          <div class="mt-5 border-bottom"style="width:100%;">
+            <div style="line-height: 2px;">
+              <p style="font-size: 20px;"><strong><%= ballot_box.question %></strong></p>
+              <p style="font-size: 10px;">投票数：30票</p>
+              <p style="font-size: 10px;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
+            </div>
+            <div class="my-1">
+              <% ballot_box.ballot_tags.each do |tag_id| %>
+                <button type="button" class="btn btn-outline-info"><%= "##{tag_id.tag.name}" %></button>
+              <% end %>
+            </div>
+            <div >
+              <a href= <%= "/ballot_boxes/#{ballot_box.id}"%> class="btn btn-outline-dark pl-0"style="border: none; font-size: 20px;">
+                <b >投票する</b>
+              </a>
+            </div>
           </div>
-          <div class="my-1">
-            <button type="button" class="btn btn-outline-info">#選挙</button>
-            <button type="button" class="btn btn-outline-info">#大阪</button>
-          </div>
-          <div >
-            <button class="btn btn-outline-dark pl-0"style="border: none; font-size: 20px;">
-              <b>投票する</b>
-            </button>
-          </div>
-        </div>
+        <% end %>
       </div>
       <a href="/ballot_boxes/new" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 15%;">
         <div style="font-size: 200%">
-          投票を作成
+          投票を作成する
         </div>
       </a>
     </div>

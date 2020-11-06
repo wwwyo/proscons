@@ -3,7 +3,7 @@ class BallotBoxesController < ApplicationController
   end
   
   def index
-    @ballot_boxes = BallotBox.includes(:tags).order(created_at: :desc)
+    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).order(created_at: :desc)
   end
 
   def new
@@ -18,6 +18,11 @@ class BallotBoxesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @ballot_box = BallotBox.find(params[:id])
+    @tags = BallotTag.where(ballot_box_id: @ballot_box.id)
   end
 
   private
