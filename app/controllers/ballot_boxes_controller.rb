@@ -13,7 +13,12 @@ class BallotBoxesController < ApplicationController
   def create
     @ballot_form = BallotForm.new(ballot_params)
     if @ballot_form.valid?
-      @ballot_form.save
+      ballot_box_id = @ballot_form.save
+      tags = tags_params
+      tags.each do |tag, name|
+        tag_add = Tag.where(name: name).first_or_create
+        BallotTag.create(ballot_box_id: ballot_box_id, tag_id: tag_add.id)
+      end
       redirect_to ballot_boxes_path
     else
       render :new
@@ -46,5 +51,9 @@ class BallotBoxesController < ApplicationController
   
   def ballot_params
     params.require(:ballot_form).permit(:question, :detail, :name).merge(user_id: current_user.id)
+  end
+
+  def tags_params
+    params[:names]
   end
 end
