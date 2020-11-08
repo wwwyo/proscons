@@ -26,17 +26,6 @@ function hashtag(){
           removeTagForm.remove();
         });
       });
-
-      // const ballotCreate = document.getElementById("ballot_create");
-      // ballotCreate.addEventListener("click", (e) => {
-      //   e.preventDefault();
-      //   const input = document.getElements
-      //   console.log(input)
-      //   const XHR = XMLHttpRequest();
-      //   XHR.open("POST", "/ballot_boxes", true)
-      //   XHR.responseType = "json"
-      //   XHR.send()
-      // })
     });
   });
 };
