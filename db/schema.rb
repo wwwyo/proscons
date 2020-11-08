@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_072246) do
+ActiveRecord::Schema.define(version: 2020_11_08_072804) do
 
   create_table "ballot_boxes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "question", null: false
@@ -30,10 +30,26 @@ ActiveRecord::Schema.define(version: 2020_11_07_072246) do
     t.index ["tag_id"], name: "index_ballot_tags_on_tag_id"
   end
 
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "ballot_box_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ballot_box_id"], name: "index_rooms_on_ballot_box_id"
+  end
+
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_user_rooms_on_room_id"
+    t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -62,6 +78,9 @@ ActiveRecord::Schema.define(version: 2020_11_07_072246) do
   add_foreign_key "ballot_boxes", "users"
   add_foreign_key "ballot_tags", "ballot_boxes"
   add_foreign_key "ballot_tags", "tags"
+  add_foreign_key "rooms", "ballot_boxes"
+  add_foreign_key "user_rooms", "rooms"
+  add_foreign_key "user_rooms", "users"
   add_foreign_key "votes", "ballot_boxes"
   add_foreign_key "votes", "users"
 end
