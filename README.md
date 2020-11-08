@@ -31,7 +31,7 @@
 - has_many :tags, through: :ballot_tags
 - has_many :ballot_tags
 - has_many :votes
-- has_one :rooms
+- has_one :room
 
 ## tags table
 
