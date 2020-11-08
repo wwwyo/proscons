@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_073900) do
+ActiveRecord::Schema.define(version: 2020_11_07_072246) do
 
   create_table "ballot_boxes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "question", null: false
@@ -49,7 +49,19 @@ ActiveRecord::Schema.define(version: 2020_11_05_073900) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.boolean "result", null: false
+    t.bigint "user_id", null: false
+    t.bigint "ballot_box_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ballot_box_id"], name: "index_votes_on_ballot_box_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "ballot_boxes", "users"
   add_foreign_key "ballot_tags", "ballot_boxes"
   add_foreign_key "ballot_tags", "tags"
+  add_foreign_key "votes", "ballot_boxes"
+  add_foreign_key "votes", "users"
 end
