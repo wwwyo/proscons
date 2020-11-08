@@ -1,18 +1,22 @@
 <div class="container-fluid">
   <div class="row" style="height: 100vh; width: 100vw;">
-    <%= render "share/side_content" %>
+    <%= render partial:"share/side_content", locals: {rooms: @rooms} %>
     <div class="col-9" style="height: 100vh;">
       <div class="title d-flex justify-content-between border-bottom" style="height: 10%; width: 100%; align-items: flex-end;">
-        <h1>タイトル</h1>
+        <h1><%= link_to @room.question, ballot_box_path(@room), style:"color: black;" %></h1>
         <div class="d-flex">
-        <p class="mr-3 btn border">ユーザーネーム：賛成</p>
-        <p class="border btn btn-outline-secondary" data-toggle="dropdown">i</p>
-        <div class="dropdown-menu">
-          <a class="dropdown-item">投票数: 30</a>
-          <a class="dropdown-item" href="#">投票を変える</a>
-          <a class="dropdown-item" href="#">このチャンネルから退会</a>
+          <% if @vote.result %>
+            <p class="mr-3 btn border">あなたの意見：賛成</p>
+          <% else %>
+            <p class="mr-3 btn border">あなたの意見：反対</p>
+          <% end %>
+          <p class="border btn btn-outline-secondary" data-toggle="dropdown">i</p>
+          <div class="dropdown-menu">
+            <a class="dropdown-item"><%= "投票数：#{@room.votes.count}" %></a>
+            <a class="dropdown-item" href="#">投票を変える</a>
+            <a class="dropdown-item" href="#">このチャンネルから退出</a>
+          </div>
         </div>
-      </div>
       </div>
       <div class="row" style="height: 75%;">
         <div class="pros col-6" style="height: 100%;  overflow: scroll;">
@@ -45,9 +49,9 @@
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center" style="height: 5%;">
-        <div>賛成:20</div>
+        <div><%= "賛成：#{@room.votes.where(result: true).count}" %></div>
         <div>-------</div>
-        <div>反対:10</div>
+        <div><%= "反対：#{@room.votes.where(result: false).count}" %></div>
       </div>
       <div style="height: 10%; width: 100%; overflow: scroll;">
         <div class="input-group" style="height: 100%;">
