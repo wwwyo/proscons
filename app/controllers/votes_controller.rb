@@ -3,6 +3,7 @@ class VotesController < ApplicationController
     vote = Vote.new(vote_params)
     if vote.valid?
       vote.save
+      UserRoom.create(user_id: current_user.id, room_id: vote.ballot_box.room.id)
       redirect_to "/ballot_boxes/:#{params[:ballot_box_id]}/rooms"
     else
       redirect_to "/ballot_boxes/:#{params[:ballot_box_id]}"

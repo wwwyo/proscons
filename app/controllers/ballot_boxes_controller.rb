@@ -14,10 +14,11 @@ class BallotBoxesController < ApplicationController
     @ballot_form = BallotForm.new(ballot_params)
     if @ballot_form.valid?
       ballot_box_id = @ballot_form.save
-      tags = tags_params
-      tags.each do |tag, name|
-        tag_add = Tag.where(name: name).first_or_create
-        BallotTag.create(ballot_box_id: ballot_box_id, tag_id: tag_add.id)
+      if tags = tags_params
+        tags.each do |tag, name| 
+          tag_add = Tag.where(name: name).first_or_create
+          BallotTag.create(ballot_box_id: ballot_box_id, tag_id: tag_add.id)
+        end
       end
       redirect_to ballot_boxes_path
     else

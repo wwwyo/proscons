@@ -13,6 +13,7 @@ class BallotForm
     tag = Tag.where(name: name).first_or_initialize
     tag.save
     BallotTag.create(ballot_box_id: ballot_box.id, tag_id: tag.id)
+    Room.create(ballot_box_id: ballot_box.id)
     return ballot_box.id
   end
 end
