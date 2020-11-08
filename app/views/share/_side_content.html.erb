@@ -17,12 +17,15 @@
     </div>
     <div class="side-main mt-5 pt-4" style="height: 70%; overflow: scroll;">
       <div style="font-size:20px">チャンネル</div>
-      <div class="list-group " style="list-style: none; font-size: 12px; ">
-        <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">▶︎大阪都構想について</a>
-        <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">▶︎今日の夕食について</a>
-        <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">▶︎大学へ進学か就職か</a>
-        <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#"exit>▶︎恋人について</a>
-      </div>
+      <% if user_signed_in?%>
+        <div class="list-group " style="list-style: none; font-size: 12px; ">
+          <% rooms.each do |i| %>
+            <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">
+              <%= "▶︎#{i.room.ballot_box.question}" %>
+            </a>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
@@ -31,5 +34,4 @@
 <!-- PopperのJS読み込み -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <!-- BootstrapのJS読み込み -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  

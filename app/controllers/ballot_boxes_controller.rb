@@ -1,4 +1,6 @@
 class BallotBoxesController < ApplicationController
+  before_action :room_name, only: [:index, :new, :show, :edit], if: :user_signed_in?
+
   def top
   end
   
@@ -51,7 +53,10 @@ class BallotBoxesController < ApplicationController
   end
 
   private
-  
+  def room_name
+    @rooms = current_user.user_rooms.includes(:room)
+  end
+
   def ballot_params
     params.require(:ballot_form).permit(:question, :detail, :name).merge(user_id: current_user.id)
   end
