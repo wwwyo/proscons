@@ -28,6 +28,8 @@ class BallotBoxesController < ApplicationController
   def show
     @ballot_box = BallotBox.find(params[:id])
     @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
+    @vote = Vote.new
+    @votes = @ballot_box.votes
   end
 
   def edit
@@ -57,3 +59,4 @@ class BallotBoxesController < ApplicationController
     params[:names]
   end
 end
+
