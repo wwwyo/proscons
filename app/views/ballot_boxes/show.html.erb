@@ -31,7 +31,7 @@
       </div>
       <div style="height: 15%;" id="vote-result">
         <% if @votes.find_by(user_id: current_user.id) %>
-          <a href="#" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="height: 100%;">
+          <a href="<%= ballot_box_rooms_path(@ballot_box)%>" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="height: 100%;">
             <div style="font-size: 200%">
               チャンネルに移動する
             </div>

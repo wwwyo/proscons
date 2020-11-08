@@ -3,9 +3,9 @@ class VotesController < ApplicationController
     vote = Vote.new(vote_params)
     if vote.valid?
       vote.save
-      redirect_to ballot_boxes_path
+      redirect_to "/ballot_boxes/:#{params[:ballot_box_id]}/rooms"
     else
-      redirect_to ballot_box_path(params[:ballot_box_id])
+      redirect_to "/ballot_boxes/:#{params[:ballot_box_id]}"
     end
   end
 
