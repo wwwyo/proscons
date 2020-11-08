@@ -1,5 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Vote, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @vote = FactoryBot.build(:vote)
+  end
+  describe 'ballot_boxに対して賛成または反対を投票できる' do
+    it 'resultに1が入っていると保存される' do
+
+    end
+    it 'resultに0が入っていると保存される' do
+
+    end
+  end
 end
