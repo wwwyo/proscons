@@ -14,7 +14,7 @@
           <div class="dropdown-menu">
             <a class="dropdown-item"><%= "投票数：#{@room.votes.count}" %></a>
             <a class="dropdown-item" href="#">投票を変える</a>
-            <a class="dropdown-item" href="#">このチャンネルから退出</a>
+            <%= link_to "このチャンネルから退出", ballot_box_room_path(@room, @room.room), method: :delete, class:"dropdown-item" %>
           </div>
         </div>
       </div>
