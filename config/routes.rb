@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root to: 'ballot_boxes#top'
   resources :ballot_boxes do
     resources :votes, only: [:create]
-    resources :rooms, only: [:index]
+    resources :rooms, only: [:index, :destroy]
   end
 end
