@@ -1,8 +1,8 @@
 class DiscussionsController < ApplicationController
   def create
-    discussion = Discussion.new(discussion_params)
-    if discussion.valid?
-      discussion.save
+    @discussion = Discussion.new(discussion_params)
+    if @discussion.save
+      ActionCable.server.broadcast 'discussion_channel', content: @discussion
     end
   end
 
