@@ -19,9 +19,9 @@
       <div style="font-size:20px">チャンネル</div>
       <% if user_signed_in?%>
         <div class="list-group " style="list-style: none; font-size: 12px; ">
-          <% rooms.each do |i| %>
+          <% user_rooms.each do |user_room| %>
             <a class="list-group-item list-group-item-action py-1" style="border :none; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" data-toggle="list" href="#">
-              <%= "▶︎#{i.room.ballot_box.question}" %>
+              <%= "▶︎#{user_room.room.ballot_box.question}" %>
             </a>
           <% end %>
         </div>

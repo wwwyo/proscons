@@ -8,6 +8,6 @@ class RoomsController < ApplicationController
 
   private
   def room_name
-    @rooms = current_user.user_rooms.includes(:room)
+    @user_rooms = current_user.user_rooms.includes(:room)
   end
 end

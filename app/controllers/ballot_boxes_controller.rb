@@ -54,7 +54,7 @@ class BallotBoxesController < ApplicationController
 
   private
   def room_name
-    @rooms = current_user.user_rooms.includes(:room)
+    @user_rooms = current_user.user_rooms.includes(:room)
   end
 
   def ballot_params
