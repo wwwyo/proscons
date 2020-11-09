@@ -4,6 +4,8 @@ class RoomsController < ApplicationController
   def index
     @room = BallotBox.find(params[:ballot_box_id])
     @vote = Vote.find_by(user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
+    @discussion = Discussion.new
+    @discussions = Discussion.all
   end
 
   def destroy
