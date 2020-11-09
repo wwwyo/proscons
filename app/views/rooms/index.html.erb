@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100vh; width: 100vw;">
+    <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
+    <div class="col-9" style="height: 100vh;">
+      <div class="title d-flex justify-content-between border-bottom" style="height: 10%; width: 100%; align-items: flex-end;">
+        <h1><%= link_to @room.question, ballot_box_path(@room), style:"color: black;" %></h1>
+        <div class="d-flex">
+          <% if @vote.result %>
+            <p class="mr-3 btn border">あなたの意見：賛成</p>
+          <% else %>
+            <p class="mr-3 btn border">あなたの意見：反対</p>
+          <% end %>
+          <p class="border btn btn-outline-secondary" data-toggle="dropdown">i</p>
+          <div class="dropdown-menu">
+            <a class="dropdown-item"><%= "投票数：#{@room.votes.count}" %></a>
+            <a class="dropdown-item" href="#">投票を変える</a>
+            <%= link_to "このチャンネルから退出", ballot_box_room_path(@room, @room.room), method: :delete, class:"dropdown-item" %>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="height: 75%;">
+        <div class="pros col-6" style="height: 100%;  overflow: scroll;">
+          <div class="my-4">
+            <div class="border p-2" style="border-radius: 3px;">
+              人と金をもっと大阪に呼び込むべきだと思う！<br>反対する理由がわからない！世界的に大阪の知名度を上げるべきだ！
+            </div>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+          </div>
+          <div class="my-4">
+            <div class="border p-2" style="border-radius: 3px;">
+              人と金をもっと大阪に呼び込むべきだと思う！<br>反対する理由がわからない！世界的に大阪の知名度を上げるべきだ！
+            </div>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="cons col-6" style="height: 100%;  overflow: scroll;">
+          <div class="my-4" >
+            <div class="border p-2 d-flex" style="border-radius: 3px;">
+              コロナの状況下で財務状況が厳しい<br>都構想が実現したとして意味があるのは一部の企業だけだ！個人には何の意味もない
+            </div>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center" style="height: 5%;">
+        <div><%= "賛成：#{@room.votes.where(result: true).count}" %></div>
+        <div>-------</div>
+        <div><%= "反対：#{@room.votes.where(result: false).count}" %></div>
+      </div>
+      <div style="height: 10%; width: 100%; overflow: scroll;">
+        <div class="input-group" style="height: 100%;">
+          <input type="text" class="form-control"style="height: 100%;" placeholder="コメント入力" aria-label="submit" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button type="submit" class="input-group-text" id="basic-addon2">投稿</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

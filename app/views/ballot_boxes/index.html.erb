@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <div class="row" style="height: 100vh; width: 100vw;">
-    <%= render "share/side_content" %>
+    <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
       <div style="height: 85%; overflow: scroll;">
         <% @ballot_boxes.each do |ballot_box| %>
           <div class="mt-5 border-bottom"style="width:100%;">
             <div style="line-height: 2px;">
               <p style="font-size: 20px;"><strong><%= ballot_box.question %></strong></p>
-              <p style="font-size: 10px;">投票数：30票</p>
+              <p style="font-size: 10px;"><%= "投票数：#{ballot_box.votes.count}" %></p>
               <p style="font-size: 10px;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
             </div>
             <div class="my-1">

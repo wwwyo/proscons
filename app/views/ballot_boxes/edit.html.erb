@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row" style="height: 100vh; width: 100vw;">
-    <%= render "share/side_content" %>
+    <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
       <div style="height: 85%; overflow: scroll;">
         <%= form_with model: @tag, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
