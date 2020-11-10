@@ -19,34 +19,35 @@
         </div>
       </div>
       <div class="row" style="height: 75%; overflow: scroll;">
-        <div class="pros col-6" style="height: 100%;" id="pros-comments">
-          <% @pros_votes.each do |pros_vote| %>
-            <% pros_vote.discussions.each do |pros_discussion| %>
-              <div class="my-4" >
-                <div class="border p-2 d-flex" style="border-radius: 3px;">
-                  <%= safe_join(pros_discussion.comment.split("\n"),tag(:br)) %>   
+        <% @discussions.each do |discussion| %>
+          <div style="width:100%;">
+            <% if discussion.vote_result %>
+              <div class="col-8 my-3" id="pros-comments">
+                <div class="my-1">
+                  <div class="border p-3" style="border-radius: 5px; display: inline-block;">
+                    <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>
+                  </div>
                 </div>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                 </svg>
               </div>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="cons col-6" style="height: 100%;" id="cons-comments">
-          <% @cons_votes.each do |cons_vote| %>
-            <% cons_vote.discussions.each do |cons_discussion| %>
-              <div class="my-4" >
-                <div class="border p-2 d-flex" style="border-radius: 3px;">
-                  <%= safe_join(cons_discussion.comment.split("\n"),tag(:br)) %>   
+            <% else %>
+              <div class="col-8 offset-4 my-3" id="cons-comments">
+                <div class="my-1" style="text-align: right;">
+                  <div class="border p-2" style="border-radius: 3px; text-align:left; display: inline-block;">
+                    <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>   
+                  </div>
                 </div>
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                </svg>
+                <div style="text-align: right;">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill button" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                  </svg>
+                </div>
               </div>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
       <div class="d-flex justify-content-between align-items-center" style="height: 5%;">
         <div><%= "賛成：#{@ballot_room.votes.where(result: true).count}" %></div>
@@ -56,7 +57,7 @@
       <div style="height: 10%; width: 100%; overflow: scroll;">
         <%= form_with model: [@ballot_room, @ballot_room.room, @discussion] do |f| %>
           <div class="d-flex" style="height: 10vh;">
-            <%= f.hidden_field :vote, value: @vote.id%>
+            <%= f.hidden_field :vote_result, value: @vote.result %>
             <%= f.text_area :comment, class:"form-control", style:"font-size: 200%; resize: none;", rows:"1", placeholder:"コメント入力" %>
             <%= f.submit "投稿", class:"input-group-text"%>
           </div>
