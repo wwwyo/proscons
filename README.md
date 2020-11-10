@@ -68,6 +68,7 @@
 
 - belongs_to :user
 - belongs_to :ballot_box
+- has_many :discussions
 
 ## rooms table
 
@@ -106,6 +107,7 @@
 
 - belongs_to :user
 - belongs_to :room
+- belongs_to :vote
 - has_many :likes
 
 ## likes table
