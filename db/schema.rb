@@ -32,14 +32,13 @@ ActiveRecord::Schema.define(version: 2020_11_09_051730) do
 
   create_table "discussions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "comment", null: false
+    t.boolean "vote_result", null: false
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
-    t.bigint "vote_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_discussions_on_room_id"
     t.index ["user_id"], name: "index_discussions_on_user_id"
-    t.index ["vote_id"], name: "index_discussions_on_vote_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -92,7 +91,6 @@ ActiveRecord::Schema.define(version: 2020_11_09_051730) do
   add_foreign_key "ballot_tags", "tags"
   add_foreign_key "discussions", "rooms"
   add_foreign_key "discussions", "users"
-  add_foreign_key "discussions", "votes"
   add_foreign_key "rooms", "ballot_boxes"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
