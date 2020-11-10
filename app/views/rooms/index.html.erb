@@ -4,7 +4,7 @@
     <div class="col-9" style="height: 100vh;">
       <div class="title d-flex justify-content-between border-bottom" style="height: 10%; width: 100%; align-items: flex-end;">
         <h1><%= link_to @ballot_room.question, ballot_box_path(@ballot_room), style:"color: black;" %></h1>
-        <div class="d-flex">
+        <div class="d-flex" id="<%= @vote.result %>">
           <% if @vote.result %>
             <p class="mr-3 btn border">あなたの意見：賛成</p>
           <% else %>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="row" style="height: 75%; overflow: scroll;">
-        <div class="pros col-6" style="height: 100%;" id="pros_comments">
+        <div class="pros col-6" style="height: 100%;" id="pros-comments">
           <% @pros_votes.each do |pros_vote| %>
             <% pros_vote.discussions.each do |pros_discussion| %>
               <div class="my-4" >
@@ -33,7 +33,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="cons col-6" style="height: 100%;" id="cons_comments">
+        <div class="cons col-6" style="height: 100%;" id="cons-comments">
           <% @cons_votes.each do |cons_vote| %>
             <% cons_vote.discussions.each do |cons_discussion| %>
               <div class="my-4" >

@@ -19,7 +19,13 @@ consumer.subscriptions.create("DiscussionChannel", {
                       <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                   </div>`;
-    const comments = document.getElementById('comments');
+
+    let comments;
+    if(document.getElementById("true")){
+      comments = document.getElementById('pros-comments');
+    }else{ 
+      comments = document.getElementById('cons-comments');
+    }
     const discussionComment = document.getElementById('discussion_comment');
     comments.insertAdjacentHTML('beforeend', html);
     discussionComment.value = "";
