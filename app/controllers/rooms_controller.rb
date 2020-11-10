@@ -5,8 +5,7 @@ class RoomsController < ApplicationController
     @ballot_room = BallotBox.find(params[:ballot_box_id])
     @vote = Vote.find_by(user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
     @discussion = Discussion.new
-    @pros_votes = @ballot_room.votes.where(result: true)
-    @cons_votes = @ballot_room.votes.where(result: false)
+    @discussions = @ballot_room.room.discussions
   end
 
   def destroy
