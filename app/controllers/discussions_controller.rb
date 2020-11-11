@@ -2,7 +2,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = Discussion.new(discussion_params)
     if @discussion.save
-      ActionCable.server.broadcast 'discussion_channel', content: @discussion
+      ActionCable.server.broadcast 'discussion_channel', comment: @discussion.comment, nickname: @discussion.user.nickname
     end
   end
 
