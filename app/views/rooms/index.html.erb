@@ -18,7 +18,8 @@
           </div>
         </div>
       </div>
-      <div class="row" style="height: 75%; overflow: scroll;"  id="comments-area">
+      <div class="row" style="height: 75%; overflow: scroll;">
+        <div style="width: 100%;" id="comments-area">
         <% @discussions.each do |discussion| %>
           <% if discussion.vote_result %>
             <div class="col-8 my-3">
@@ -48,6 +49,7 @@
             </div>
           <% end %>
         <% end %>
+        </div>
       </div>
       <div class="d-flex justify-content-between align-items-center" style="height: 5%;">
         <div><%= "賛成：#{@ballot_room.votes.where(result: true).count}" %></div>

@@ -44,6 +44,7 @@ consumer.subscriptions.create("DiscussionChannel", {
       </div>`;
     }
     commentsArea.insertAdjacentHTML('beforeend', html);
+    commentsArea.scrollIntoView(false);
     const discussionComment = document.getElementById('discussion_comment');
     discussionComment.value = "";
   }
