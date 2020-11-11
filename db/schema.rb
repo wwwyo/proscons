@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_051730) do
+ActiveRecord::Schema.define(version: 2020_11_11_033918) do
 
   create_table "ballot_boxes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "question", null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 2020_11_09_051730) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_discussions_on_room_id"
     t.index ["user_id"], name: "index_discussions_on_user_id"
+  end
+
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "discussion_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["discussion_id"], name: "index_likes_on_discussion_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -91,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_11_09_051730) do
   add_foreign_key "ballot_tags", "tags"
   add_foreign_key "discussions", "rooms"
   add_foreign_key "discussions", "users"
+  add_foreign_key "likes", "discussions"
+  add_foreign_key "likes", "users"
   add_foreign_key "rooms", "ballot_boxes"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
