@@ -96,11 +96,12 @@
 
 ## discussions table
 
-| Column  | Type       | Options                        |
-| ------- | ---------  | ------------------------------ |
-| comment | text       | null: false                    |
-| user_id | references | null: false, foreign_key: true |
-| room_id | references | null: false, foreign_key: true |
+| Column      | Type       | Options                        |
+| ----------- | ---------  | ------------------------------ |
+| comment     | text       | null: false                    |
+| vote_result | boolean    | null: false                    |
+| user_id     | references | null: false, foreign_key: true |
+| room_id     | references | null: false, foreign_key: true |
 
 ### Association
 
