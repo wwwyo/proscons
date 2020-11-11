@@ -24,6 +24,7 @@
             <% if discussion.vote_result %>
               <div class="col-8 my-3" id="pros-comments">
                 <div class="my-1">
+                  <p class="mb-0"style="font-size: 80%;"><%= "#{discussion.user.nickname}:賛成"%></p>
                   <div class="border p-3" style="border-radius: 5px; display: inline-block;">
                     <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>
                   </div>
@@ -35,6 +36,7 @@
             <% else %>
               <div class="col-8 offset-4 my-3" id="cons-comments">
                 <div class="my-1" style="text-align: right;">
+                  <p class="mb-0"style="font-size: 80%;"><%= "#{discussion.user.nickname}:反対"%></p>
                   <div class="border p-2" style="border-radius: 3px; text-align:left; display: inline-block;">
                     <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>   
                   </div>
