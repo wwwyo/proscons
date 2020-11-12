@@ -29,7 +29,11 @@
                   <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>
                 </div>
               </div>
-              <div type="button" class="like btn p-0" id=<%= "discussion-#{discussion.id}" %>>
+              <% if discussion.likes.find_by(user_id: current_user.id)%>
+                <div type="button" class="like btn p-0" id=<%= "discussion-#{discussion.id}" %> style="color: blue;">
+              <% else %>
+                <div type="button" class="like btn p-0" id=<%= "discussion-#{discussion.id}" %>>
+              <% end %>
                 <span class="fa fa-thumbs-o-up">いいね！</span>
               </div>
             </div>
@@ -42,7 +46,11 @@
                 </div>
               </div>
               <div style="text-align: right;">
-                <div type="button" class="like btn p-0" id=<%= "discussion-#{discussion.id}" %>>
+                <% if discussion.likes.find_by(user_id: current_user.id)%>
+                  <div type="button" class="like btn p-0" id=<%= "discussion-#{discussion.id}" %> style="color: blue;">
+                <% else %>
+                  <div type="button" class="like btn p-0" id=<%= "discussion-#{discussion.id}" %>>
+                <% end %>
                   <span class="fa fa-thumbs-o-up">いいね！</span>
                 </div>
               </div>
