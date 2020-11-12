@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("../tag.js")
 require("../vote.js")
+require("../like.js")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
