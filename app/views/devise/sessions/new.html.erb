@@ -1,14 +1,14 @@
 <%= form_with model: @user, url: user_session_path, local: true do |f| %>
   <div class="bg-light d-flex justify-content-center pt-5" style="width: 100vw; height: 100vh;">
-    <div class="d-flex align-items-center border mt-5 pt-5 px-4" style="width: 50vh; height: 50%;">
-      <div class="container mx-auto" style="width: 50vw; height: 50vh;">
-        <h1 class="border-bottom my-5 py-2">prosconsにログイン</h1>
+    <div class="d-flex border mt-5 p-5" style="width: 50vh; height: 55%;">
+      <div class="container mt-5">
+        <h1 class="border-bottom">prosconsにログイン</h1>
         <div class="text-danger mb-4">
           <%= flash[:notice] %>
           <%= flash[:alert] %>
         </div>
         <form>
-          <div class="form-group">
+          <div class="form-group mt-3">
             <%= f.label :email, 'メールアドレス' %>
             <%= f.email_field :email, class: "form-control", id: "email", ariadescribedby: "emailHelp", placeholder: "メールアドレス" %>
           </div>
