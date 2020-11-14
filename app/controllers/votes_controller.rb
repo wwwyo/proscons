@@ -10,6 +10,17 @@ class VotesController < ApplicationController
     end
   end
 
+  def update
+    vote = Vote.find(params[:id])
+    if vote.result
+      vote.result = 0
+    else
+      vote.result = 1
+    end
+    vote.save
+    redirect_to "/ballot_boxes/#{params[:ballot_box_id]}/rooms"
+  end
+
   private
   def vote_params
     params.require(:vote).permit(:result).merge(user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
