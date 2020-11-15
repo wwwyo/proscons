@@ -13,7 +13,7 @@
           <p class="border btn btn-outline-secondary" data-toggle="dropdown">i</p>
           <div class="dropdown-menu">
             <a class="dropdown-item"><%= "作成者：#{@ballot_room.user.nickname}" %></a>
-            <a class="dropdown-item"><%= "参加数：#{@ballot_room.votes.includes(:user).count}" %></a>
+            <a class="dropdown-item"><%= "参加数：#{@ballot_room.votes.includes(:user).count}人" %></a>
             <%= link_to "このチャンネルから退出", ballot_box_room_path(@ballot_room, @ballot_room.room), method: :delete, class:"dropdown-item" %>
           </div>
         </div>

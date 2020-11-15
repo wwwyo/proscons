@@ -2,7 +2,8 @@
   <div class="row" style="height: 100vh; width: 100vw;">
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
-      <div style="height: 85%; overflow: scroll;">
+      <%= render partial: "share/header", locals: { search: @search} %>
+      <div class="my-1" style="height: 80%; overflow: scroll;">
         <% @ballot_boxes.each do |ballot_box| %>
           <div class="mt-5 border-bottom"style="width:100%;">
             <div style="line-height: 2px;">
@@ -23,7 +24,7 @@
           </div>
         <% end %>
       </div>
-      <a href="/ballot_boxes/new" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 15%;">
+      <a href="/ballot_boxes/new" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 14%;">
         <div style="font-size: 200%">
           投票を作成する
         </div>
