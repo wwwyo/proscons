@@ -1,11 +1,17 @@
 class BallotBoxesController < ApplicationController
-  before_action :room_name, only: [:index, :new, :show, :edit], if: :user_signed_in?
+  before_action :room_name, only: [:index, :new, :show, :edit, :popular], if: :user_signed_in?
 
   def top
   end
   
   def index
     @ballot_boxes = BallotBox.includes(ballot_tags: :tag).order(created_at: :desc)
+    @search = Tag.ransack(params[:q])
+  end
+
+  def popular
+    @ballot_boxes =  BallotBox.includes(ballot_tags: :tag).joins(:votes).group('ballot_boxes.id').order(Arel.sql('count(ballot_boxes.id) desc'))
+    @search = Tag.ransack(params[:q])
   end
 
   def new

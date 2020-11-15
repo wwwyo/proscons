@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="row" style="height: 100vh; width: 100vw;">
+    <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
+    <div class="col-9" style="height: 100vh;">
+      <%= render partial: "share/header", locals: { search: @search} %>
+      <div class="my-1" style="height: 80%; overflow: scroll;">
+        <% @ballot_boxes.each do |ballot_box| %>
+          <div class="mt-5 border-bottom"style="width:100%;">
+            <div style="line-height: 2px;">
+              <p style="font-size: 20px;"><strong><%= ballot_box.question %></strong></p>
+              <p style="font-size: 10px;"><%= "投票数：#{ballot_box.votes.count}" %></p>
+              <p style="font-size: 10px;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
+            </div>
+            <div class="my-1">
+              <% ballot_box.ballot_tags.each do |tag_id| %>
+                <button type="button" class="btn btn-outline-info"><%= "##{tag_id.tag.name}" %></button>
+              <% end %>
+            </div>
+            <div >
+              <a href= <%= "/ballot_boxes/#{ballot_box.id}"%> class="btn btn-outline-dark pl-0"style="border: none; font-size: 20px;">
+                <b >投票する</b>
+              </a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <a href="/ballot_boxes/new" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 14%;">
+        <div style="font-size: 200%">
+          投票を作成する
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
