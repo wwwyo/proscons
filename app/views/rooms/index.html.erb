@@ -6,14 +6,14 @@
         <h1><%= link_to @ballot_room.question, ballot_box_path(@ballot_room), style:"color: black;" %></h1>
         <div class="d-flex" id="<%= @vote.result %>">
           <% if @vote.result %>
-            <p><a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-outline-danger" id="change-vote">あなたの意見：賛成</a></p>
+            <p><a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-outline-success" id="change-vote">あなたの意見：賛成</a></p>
           <% else %>
             <p><a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-outline-primary" id="change-vote">あなたの意見：反対</a></p>
           <% end %>
           <p class="border btn btn-outline-secondary" data-toggle="dropdown">i</p>
           <div class="dropdown-menu">
-            <a class="dropdown-item"><%= "主催者：#{@ballot_room.user.nickname}" %></a>
-            <a class="dropdown-item"><%= "参加者数：#{@ballot_room.votes.includes(:user).count}" %></a>
+            <a class="dropdown-item"><%= "作成者：#{@ballot_room.user.nickname}" %></a>
+            <a class="dropdown-item"><%= "参加数：#{@ballot_room.votes.includes(:user).count}" %></a>
             <%= link_to "このチャンネルから退出", ballot_box_room_path(@ballot_room, @ballot_room.room), method: :delete, class:"dropdown-item" %>
           </div>
         </div>
@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="d-flex align-items-center" style="height: 40%;">
-          <div class="bg-danger" style="width: <%= @ballot_room.votes.where(result: true).count.to_f / @ballot_room.votes.count.to_f * 100  %>%; height: 70%;"></div>
+          <div class="bg-success" style="width: <%= @ballot_room.votes.where(result: true).count.to_f / @ballot_room.votes.count.to_f * 100  %>%; height: 70%;"></div>
           <div class="bg-primary" style="width: <%= @ballot_room.votes.where(result: false).count.to_f / @ballot_room.votes.count.to_f * 100 %>%; height: 70%;"></div>
         </div>
       </div>
