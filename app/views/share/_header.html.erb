@@ -1,0 +1,22 @@
+<div class="row border-bottom bg-light" style="height: 5%;">
+  <div class="container d-flex align-items-center justify-content-between">
+    <%= search_form_for search, url: ballot_boxes_path do |f| %>
+      <div class="d-flex"style="width:50vw;">
+        <%= f.search_field :name_cont, class:"form-control", placeholder:"#投票を検索"%>
+        <%= f.submit "検索", class: "border btn btn-outline-secondary" %>
+      </div>
+    <% end %>
+    <div class="border btn btn-outline-secondary" data-toggle="dropdown">?</div>
+    <div class="dropdown-menu">
+      <p class="dropdown-item">
+        <b>Prosconsはあなたの意見を尊重します。</b>
+        <br>[step1]投票を作成しよう
+        <br>[step2]賛成か反対を投票しよう
+        <br>[step3]チャンネルで発言しよう
+        <br>[step4]意見にいいねを押そう
+        <br>
+        <br>*いいねの数に応じて投票数が変化します
+      </p>
+    </div>
+  </div>
+</div>

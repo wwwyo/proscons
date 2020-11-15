@@ -1,11 +1,16 @@
 class BallotBoxesController < ApplicationController
-  before_action :room_name, only: [:index, :new, :show, :edit], if: :user_signed_in?
+  before_action :room_name, if: :user_signed_in?
+  before_action :search
 
   def top
   end
   
   def index
-    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).order(created_at: :desc)
+    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: {tag_id: @search.result.ids}).order(created_at: :desc)
+  end
+
+  def popular
+    @ballot_boxes =  BallotBox.includes(ballot_tags: :tag).joins(:votes).group('ballot_boxes.id').order(Arel.sql('count(ballot_boxes.id) desc'))
   end
 
   def new
@@ -55,6 +60,10 @@ class BallotBoxesController < ApplicationController
   private
   def room_name
     @user_rooms = current_user.user_rooms.includes(:room)
+  end
+
+  def search
+    @search = Tag.ransack(params[:q])
   end
 
   def ballot_params
