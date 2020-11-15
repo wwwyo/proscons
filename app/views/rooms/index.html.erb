@@ -2,7 +2,8 @@
   <div class="row" style="height: 100vh; width: 100vw;">
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
-      <div class="title d-flex justify-content-between border-bottom" style="height: 10%; width: 100%; align-items: flex-end;">
+      <%= render partial: "share/header", locals: { search: @search} %>
+      <div class="title d-flex justify-content-between border-bottom" style="height: 7%; width: 100%; align-items: flex-end;">
         <h1><%= link_to @ballot_room.question, ballot_box_path(@ballot_room), style:"color: black;" %></h1>
         <div class="d-flex" id="<%= @vote.result %>">
           <% if @vote.result %>
@@ -18,7 +19,7 @@
           </div>
         </div>
       </div>
-      <div class="row" style="height: 72%; overflow: scroll;">
+      <div class="row" style="height: 69%; overflow: scroll;">
         <div style="width: 100%;" id="comments-area">
         <% @discussions.each do |discussion| %>
           <% if discussion.vote_result %>

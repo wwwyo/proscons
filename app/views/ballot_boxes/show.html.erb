@@ -2,7 +2,8 @@
   <div class="row" style="height: 100vh; width: 100vw;">
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
-      <div style="height: 85%; overflow: scroll;">
+      <%= render partial: "share/header", locals: { search: @search} %>
+      <div style="height: 80%; overflow: scroll;">
         <form class="mt-5">
           <fieldset disabled>
             <div class="form-group" style="line-height: 100%;">
@@ -29,7 +30,7 @@
           <% end %>
         </form>
       </div>
-      <div style="height: 15%;" id="vote-result">
+      <div style="height: 14%;" id="vote-result">
         <% if @votes.find_by(user_id: current_user.id) %>
           <a href="<%= ballot_box_rooms_path(@ballot_box)%>" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="height: 100%;">
             <div style="font-size: 200%">
