@@ -4,7 +4,9 @@
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
       <div class="title d-flex justify-content-between border-bottom" style="height: 7%; width: 100%; align-items: flex-end;">
-        <h1><%= link_to @ballot_room.question, ballot_box_path(@ballot_room), style:"color: black;" %></h1>
+        <h2 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+          <%= link_to @ballot_room.question, ballot_box_path(@ballot_room), style:"color: black;" %>
+        </h2>
         <div class="d-flex" id="<%= @vote.result %>">
           <% if @vote.result %>
             <p><a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-outline-success" id="change-vote">あなたの意見：賛成</a></p>
@@ -27,7 +29,7 @@
               <div class="my-0">
                 <p class="mb-0" style="font-size: 80%;"><%= "#{discussion.user.nickname}:賛成"%></p>
                 <div class="border p-2" style="border-radius: 5px; display: inline-block;">
-                  <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>
+                  <h5><%= safe_join(discussion.comment.split("\n"),tag(:br)) %></h5>
                 </div>
               </div>
               <% if discussion.likes.find_by(user_id: current_user.id)%>
@@ -43,7 +45,7 @@
               <div class="my-0" style="text-align: right;">
                 <p class="mb-0" style="font-size: 80%;"><%= "#{discussion.user.nickname}:反対"%></p>
                 <div class="border p-2" style="border-radius: 3px; text-align:left; display: inline-block;">
-                  <%= safe_join(discussion.comment.split("\n"),tag(:br)) %>   
+                  <h5><%= safe_join(discussion.comment.split("\n"),tag(:br)) %></h5> 
                 </div>
               </div>
               <div style="text-align: right;">
