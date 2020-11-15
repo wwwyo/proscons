@@ -5,8 +5,8 @@ class BallotBoxesController < ApplicationController
   end
   
   def index
-    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).order(created_at: :desc)
     @search = Tag.ransack(params[:q])
+    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: {tag_id: @search.result.ids}).order(created_at: :desc)
   end
 
   def popular
