@@ -3,28 +3,30 @@
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
-      <div style="height: 80%; overflow: scroll;">
+      <div class="mb-1" style="height: 82%; overflow: scroll;">
         <%= form_with model: @ballot_form, url: ballot_boxes_path, local: true do |f| %>
-          <div class="mt-5">
+          <div class="mt-4">
             <%= render "share/errors_messages", model: f.object %>
           </div>
-          <div class="form-group mt-5" style="line-height: 100%">
+          <div class="form-group mt-4" style="line-height: 100%">
             <div class="d-flex">
               <%= f.label :question, 'タイトル', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">必須</span>
             </div>
             <%= f.text_field :question, class: "form-control form-control-lg", id:"question", placeholder: "質問タイトル" %>
           </div>
-          <div class="form-group mt-5" style="line-height: 100%;">
+          <div class="form-group mt-4" style="line-height: 100%;">
             <%= f.label :detail, '詳細', style:"font-size: 200%;" %>
             <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文"%>
           </div>
-          <div class="form-group mt-5" style="line-height: 100%;" id="tag-form">
+          <div class="form-group mt-4" style="line-height: 100%;" id="tag-form">
             <div class="d-flex">
               <%= f.label :name, 'ハッシュタグ', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">必須</span>
             </div>
-            <div class="input-group-prepend" style="width: 100%;">
+            <div class="d-flex input-group-prepend" style="width: 100%;">
               <div class="input-group-text">#</div>
-              <%= f.text_field :name, class:"form-control", id:"tag", placeholder:"1つずつ入力"%>
+              <div style="width: 100%;">
+                <%= f.text_field :name, class:"form-control", id:"tag", placeholder:"1つずつ入力"%>
+              </div>
               <button type="button" class="btn btn-outline-dark" id="add-tag">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
@@ -33,7 +35,7 @@
             </div>
           </div>
       </div>
-          <%= f.submit '投票作成', class:"container  btn btn-outline-danger d-flex justify-content-center align-items-center", style:"height: 14%; font-size: 200%;", id:"ballot_create"%>
+          <%= f.submit '投票作成', class:"container  btn btn-outline-danger d-flex justify-content-center align-items-center", style:"height: 10%; font-size: 200%;", id:"ballot_create"%>
         <% end %>
     </div>
   </div>
