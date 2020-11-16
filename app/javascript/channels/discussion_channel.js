@@ -21,7 +21,7 @@ consumer.subscriptions.create("DiscussionChannel", {
         <div class="my-0">
           <p class="mb-0"style="font-size: 80%;">${nickname}:賛成 </p>
           <div class="border p-2" style="border-radius: 5px; display: inline-block;">
-            <h5>${comment}</h5>
+            <p class="mb-0">${comment}</p>
           </div>
         </div>
         <div type="button" class="like btn p-0" id="discussion-${discussionId}">
@@ -34,7 +34,7 @@ consumer.subscriptions.create("DiscussionChannel", {
         <div class="my-0" style="text-align: right;">
           <p class="mb-0"style="font-size: 80%;">${nickname}:反対</p>
           <div class="border p-2" style="border-radius: 3px; text-align:left; display: inline-block;">
-            <h5>${comment}</h5> 
+          <p class="mb-0">${comment}</p>
           </div>
         </div>
         <div style="text-align: right;">
