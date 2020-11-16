@@ -24,27 +24,35 @@
               <% end %>
             </div>
           </fieldset>
-          <% if current_user.id == @ballot_box.user_id %>
+          <% if user_signed_in? && current_user.id == @ballot_box.user_id %>
             <%= link_to "編集する", edit_ballot_box_path(@ballot_box), class:"btn btn-danger mt-5", style: "width: 100%;" %>
             <%= link_to "削除する", ballot_box_path(@ballot_box), method: :delete, class:"btn btn-secondary mt-1", style:"width: 100%;" %>
           <% end %>
         </form>
       </div>
       <div style="height: 10%;" id="vote-result">
-        <% if @votes.find_by(user_id: current_user.id) %>
+        <% if user_signed_in? %>
+          <% if @votes.find_by(user_id: current_user.id) %>
+            <a href="<%= ballot_box_rooms_path(@ballot_box)%>" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="height: 100%;">
+              <div style="font-size: 200%">
+                チャンネルに参加する
+              </div>
+            </a>
+          <% else %>
+            <%= form_with model: [@ballot_box, @vote], local: true do |f| %>
+              <div class="d-flex">
+                <%= f.text_field :result, type:"hidden", id:"vote-form"%>
+                <%= f.submit '賛成', class:"col-6 btn btn-outline-success", style:"font-size: 200%; height: 10vh;", id:"pros-btn" %>
+                <%= f.submit '反対', class:"col-6 btn btn-outline-primary", style:"font-size: 200%; height: 10vh;", id:"cons-btn" %>
+              </div>
+            <% end %>
+          <% end %>  
+        <% else %>
           <a href="<%= ballot_box_rooms_path(@ballot_box)%>" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="height: 100%;">
             <div style="font-size: 200%">
-              チャンネルに参加する
+              チャンネルを覗く
             </div>
           </a>
-        <% else %>
-          <%= form_with model: [@ballot_box, @vote], local: true do |f| %>
-            <div class="d-flex">
-              <%= f.text_field :result, type:"hidden", id:"vote-form"%>
-              <%= f.submit '賛成', class:"col-6 btn btn-outline-success", style:"font-size: 200%; height: 10vh;", id:"pros-btn" %>
-              <%= f.submit '反対', class:"col-6 btn btn-outline-primary", style:"font-size: 200%; height: 10vh;", id:"cons-btn" %>
-            </div>
-          <% end %>
         <% end %>
       </div>
     </div>

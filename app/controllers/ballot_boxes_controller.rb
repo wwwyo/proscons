@@ -1,8 +1,10 @@
 class BallotBoxesController < ApplicationController
-  before_action :room_name, if: :user_signed_in?
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :room_name, except: :top, if: :user_signed_in?
   before_action :search
 
   def top
+    redirect_to action: :index if user_signed_in?
   end
   
   def index
