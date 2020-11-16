@@ -1,4 +1,5 @@
 class DiscussionsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @discussion = Discussion.new(discussion_params)
     if @discussion.save
