@@ -3,8 +3,8 @@
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
-      <div style="height: 80%; overflow: scroll;">
-        <form class="mt-5">
+      <div class="mb-1" style="height: 82%; overflow: scroll;">
+        <form class="mt-4">
           <fieldset disabled>
             <div class="form-group" style="line-height: 100%;">
               <label for="question" style="font-size: 200%;">タイトル</label>
@@ -30,7 +30,7 @@
           <% end %>
         </form>
       </div>
-      <div style="height: 14%;" id="vote-result">
+      <div style="height: 10%;" id="vote-result">
         <% if @votes.find_by(user_id: current_user.id) %>
           <a href="<%= ballot_box_rooms_path(@ballot_box)%>" class="btn btn-outline-primary d-flex justify-content-center align-items-center" style="height: 100%;">
             <div style="font-size: 200%">
@@ -41,8 +41,8 @@
           <%= form_with model: [@ballot_box, @vote], local: true do |f| %>
             <div class="d-flex">
               <%= f.text_field :result, type:"hidden", id:"vote-form"%>
-              <%= f.submit '賛成', class:"col-6 btn btn-outline-success", style:"font-size: 200%; height: 15vh;", id:"pros-btn" %>
-              <%= f.submit '反対', class:"col-6 btn btn-outline-primary", style:"font-size: 200%; height: 15vh;", id:"cons-btn" %>
+              <%= f.submit '賛成', class:"col-6 btn btn-outline-success", style:"font-size: 200%; height: 10vh;", id:"pros-btn" %>
+              <%= f.submit '反対', class:"col-6 btn btn-outline-primary", style:"font-size: 200%; height: 10vh;", id:"cons-btn" %>
             </div>
           <% end %>
         <% end %>

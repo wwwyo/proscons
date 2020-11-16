@@ -3,19 +3,19 @@
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
-      <div style="height: 80%; overflow: scroll;">
+      <div class="mb-1" style="height: 82%; overflow: scroll;">
         <%= form_with model: @tag, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
           <fieldset disabled>
-            <div class="form-group mt-5" style="line-height: 100%;">
+            <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :question, 'タイトル', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
               <%= f.text_field :question, class:"form-control form-control-lg", id:"question", placeholder:"質問タイトル", value: @ballot_box.question %>
             </div>
-            <div class="form-group mt-5" style="line-height: 100%;">
+            <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :detail, '詳細', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
               <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文", value: @ballot_box.detail%>
             </div>
           </fieldset>
-          <div class="form-group mt-5" style="line-height: 100%;">
+          <div class="form-group mt-4" style="line-height: 100%;">
             <%= f.label :name, 'ハッシュタグ', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">必須</span>
             <% @tags.each do |tag_id| %>
               <div class="input-group-prepend" style="width: 100%;">
@@ -25,7 +25,7 @@
             <% end %>
           </div>
       </div>
-          <%= f.submit '変更する', class:"container btn btn-outline-primary", style:"height: 14%; font-size: 200%;" %>
+          <%= f.submit '変更する', class:"container btn btn-outline-primary", style:"height: 10%; font-size: 200%;" %>
         <% end %>
     </div>
   </div>
