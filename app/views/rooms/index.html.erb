@@ -82,15 +82,23 @@
           <div class="bg-primary" style="width: <%= @ballot_room.votes.where(result: false).count.to_f / @ballot_room.votes.count.to_f * 100 %>%; height: 100%;"></div>
         </div>
       </div>
-      <div style="height: 10%; width: 100%; overflow: scroll;">
-        <%= form_with model: [@ballot_room, @ballot_room.room, @discussion] do |f| %>
-          <div class="d-flex" style="height: 10vh;">
-            <%= f.hidden_field :vote_result, value: @vote.result if user_signed_in?%>
-            <%= f.text_area :comment, class:"form-control", style:"font-size: 200%; resize: none;", rows:"1", placeholder:"コメント入力" %>
-            <%= f.submit "投稿", class:"input-group-text"%>
+      <% if user_signed_in?%>
+        <div style="height: 10%; width: 100%; overflow: scroll;">
+          <%= form_with model: [@ballot_room, @ballot_room.room, @discussion] do |f| %>
+            <div class="d-flex" style="height: 10vh;">
+              <%= f.hidden_field :vote_result, value: @vote.result %>
+              <%= f.text_area :comment, class:"form-control", style:"font-size: 200%; resize: none;", rows:"1", placeholder:"コメント入力" %>
+              <%= f.submit "投稿", class:"input-group-text"%>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <a href="/users/sign_in" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 10%;">
+          <div style="font-size: 200%">
+            コメントするにはログインしてください
           </div>
-        <% end %>
-      </div>
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
