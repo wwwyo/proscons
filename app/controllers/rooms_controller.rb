@@ -6,15 +6,20 @@ class RoomsController < ApplicationController
     @ballot_room = BallotBox.find(params[:ballot_box_id])
     @discussion = Discussion.new
     @discussions = @ballot_room.room.discussions
-    @vote = Vote.find_by(user_id: current_user.id, ballot_box_id: params[:ballot_box_id]) if user_signed_in?
+    if user_signed_in? 
+      @vote = Vote.find_by(user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
+      if @vote == nil
+        redirect_to ballot_box_path(params[:ballot_box_id])
+      elsif UserRoom.find_by(user_id: current_user.id, room_id: params[:ballot_box_id]) == nil
+        UserRoom.create(user_id: current_user.id, room_id: params[:ballot_box_id])
+      end
+    end
   end
 
   def destroy
     room = UserRoom.find_by(user_id: current_user.id, room_id: params[:id])
     if room.destroy
       redirect_to ballot_boxes_path
-    else
-      redirect_to action: :index
     end
   end
 
