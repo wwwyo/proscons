@@ -61,7 +61,7 @@ class BallotBoxesController < ApplicationController
 
   private
   def room_name
-    @user_rooms = current_user.user_rooms.includes(:room)
+    @user_rooms = current_user.user_rooms.includes(:room).order(created_at: :desc)
   end
 
   def search
