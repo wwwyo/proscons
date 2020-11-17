@@ -1,0 +1,23 @@
+ja: 
+  activerecord:
+    models:
+      user: ユーザー
+      ballot_box: 投票箱
+      tag: タグ
+      vote: 投票
+    attributes:
+      user:
+        nickname: ニックネーム
+      ballot_box:
+        question: 質問
+        detail: 詳細
+      tag:
+        name: ハッシュタグ
+  activemodel:
+    model:
+      ballot_form:
+    attributes:
+      ballot_form:
+        question: 質問のタイトル
+        name: ハッシュタグ
+  
