@@ -45,17 +45,28 @@ class BallotBoxesController < ApplicationController
   def edit
     @ballot_box = BallotBox.find(params[:id])
     @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
+    unless @ballot_box.user_id == current_user.id
+      redirect_to ballot_box_path
+    end
   end
 
   def update
+    ballot_box = BallotBox.find(params[:id])
+    unless ballot_box.user_id == current_user.id
+      redirect_to ballot_box_path
+    end
   end
 
   def destroy
     ballot_box = BallotBox.find(params[:id])
-    if ballot_box.destroy
-      redirect_to ballot_boxes_path
+    unless ballot_box.user_id == current_user.id
+      redirect_to ballot_box_path
     else
-      render :show
+      if ballot_box.destroy
+        redirect_to ballot_boxes_path
+      else
+        redirect_to ballot_box_path
+      end
     end
   end
 
