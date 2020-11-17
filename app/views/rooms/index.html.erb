@@ -15,13 +15,13 @@
               <a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-sm btn-outline-primary" id="change-vote">あなたの意見：反対</a>
             <% end %>
           <% end %>
-          <div class="btn btn-sm btn-outline-secondary" data-toggle="dropdown">i
+          <p class="btn btn-sm btn-outline-secondary mb-0" data-toggle="dropdown">i
             <div class="dropdown-menu">
               <a class="dropdown-item"><%= "作成者：#{@ballot_room.user.nickname}" %></a>
               <a class="dropdown-item"><%= "参加数：#{@ballot_room.votes.includes(:user).count}人" %></a>
               <%= link_to "このチャンネルから退出", ballot_box_room_path(@ballot_room, @ballot_room.room), method: :delete, class:"dropdown-item" if user_signed_in? %>
             </div>
-          </div>
+          </p>
         </div>
       </div>
       <div class="row" style="height: 68%; overflow: scroll;">
