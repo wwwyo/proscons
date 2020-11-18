@@ -13,6 +13,8 @@ ja:
         detail: 詳細
       tag:
         name: ハッシュタグ
+      discussion:
+        comment: コメント
   activemodel:
     model:
       ballot_form:

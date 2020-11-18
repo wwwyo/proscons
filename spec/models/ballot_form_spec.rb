@@ -24,12 +24,12 @@ RSpec.describe BallotForm, type: :model do
       it 'タイトルが空欄' do
         @ballot_form.question = ""
         @ballot_form.valid?
-        expect(@ballot_form.errors.full_messages).to include("Question can't be blank")
+        expect(@ballot_form.errors.full_messages).to include("質問のタイトルを入力してください")
       end
       it 'ハッシュタグが空欄' do
         @ballot_form.name = ""
         @ballot_form.valid?
-        expect(@ballot_form.errors.full_messages).to include("Name can't be blank")
+        expect(@ballot_form.errors.full_messages).to include("ハッシュタグを入力してください")
       end
     end
 

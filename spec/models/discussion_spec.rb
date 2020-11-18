@@ -18,13 +18,13 @@ RSpec.describe Discussion, type: :model do
       it '賛成意見の人がコメント欄を空白で投稿' do
         @discussion.comment = ""
         @discussion.valid?
-        expect(@discussion.errors.full_messages).to include("Comment can't be blank")
+        expect(@discussion.errors.full_messages).to include("コメントを入力してください")
       end
       it '反対意見の人がコメント欄を空白で投稿' do
         @discussion.vote_result = false
         @discussion.comment = ""
         @discussion.valid?
-        expect(@discussion.errors.full_messages).to include("Comment can't be blank")
+        expect(@discussion.errors.full_messages).to include("コメントを入力してください")
       end
     end
   end
