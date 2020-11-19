@@ -1,7 +1,7 @@
 <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
   <div class="bg-light" style="width: 100vw; height: 100vh;">
     <div style="padding:5% 15% 0;">
-      <h1 class="border-bottom pb-2">アカウント登録</h1>
+      <h1 class="border-bottom pb-2">アカウント作成</h1>
       <%= render "share/errors_messages", model: f.object %>
       <div class="form-group mt-2" style="width:90%;">
         <%= f.label :nickname, 'ニックネーム' %>
