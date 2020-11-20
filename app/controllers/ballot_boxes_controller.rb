@@ -57,8 +57,6 @@ class BallotBoxesController < ApplicationController
     else
       if ballot_box.update(ballot_update_params)
         redirect_to ballot_box_path(ballot_box)
-      else
-        render edit_ballot_box_path(ballot_box)
       end
     end
   end

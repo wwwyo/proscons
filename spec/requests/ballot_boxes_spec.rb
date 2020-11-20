@@ -75,11 +75,11 @@ RSpec.describe "BallotBoxes", type: :request do
         @ballot_form = FactoryBot.build(:ballot_form)
       end
       it 'リダイレクトのレスポンスが返ってくる' do
-        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, name: @ballot_form.name}}
+        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, detail: @ballot_form.detail, name: @ballot_form.name}}
         expect(response.status).to eq 302
       end
       it 'リダイレクト先が:index' do
-        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, name: @ballot_form.name}}
+        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, detail: @ballot_form.detail, name: @ballot_form.name}}
         expect(response.header).to redirect_to ballot_boxes_path
       end
     end
