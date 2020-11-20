@@ -19,15 +19,22 @@ if ( location.pathname.match("ballot_boxes\$\|/new")) {
             </button>
           </div>`;
         tagForm.insertAdjacentHTML("beforeend", inputTag);
-        const removeBtns = document.querySelectorAll(".remove-btn");
-        removeBtns.forEach(function(removeBtn) {
-          removeBtn.addEventListener('click', () =>{
-            const removeTagNum = removeBtn.getAttribute("id");
-            const removeTagForm = document.getElementById(`${removeTagNum}-form`);
-            removeTagForm.remove();
-          });
-        });
       });
     }
+    function load(){
+      const removeBtns = document.querySelectorAll(".remove-btn");
+      removeBtns.forEach(function(removeBtn) {
+        if (removeBtn.getAttribute("data-load") != null) {
+          return null;
+        }
+        removeBtn.setAttribute("data-load", "true");
+        removeBtn.addEventListener('click', () =>{
+          const removeTagNum = removeBtn.getAttribute("id");
+          const removeTagForm = document.getElementById(`${removeTagNum}-form`);
+          removeTagForm.remove();
+        });
+      });
+    };
+    setInterval(load, 1000)
   });
 }
