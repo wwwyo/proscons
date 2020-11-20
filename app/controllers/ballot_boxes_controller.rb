@@ -46,14 +46,20 @@ class BallotBoxesController < ApplicationController
     @ballot_box = BallotBox.find(params[:id])
     @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
     unless @ballot_box.user_id == current_user.id
-      redirect_to ballot_box_path
+      redirect_to ballot_box_path(@ballot_box)
     end
   end
 
   def update
     ballot_box = BallotBox.find(params[:id])
     unless ballot_box.user_id == current_user.id
-      redirect_to ballot_box_path
+      redirect_to ballot_box_path(ballot_box)
+    else
+      if ballot_box.update(ballot_update_params)
+        redirect_to ballot_box_path(ballot_box)
+      else
+        render edit_ballot_box_path(ballot_box)
+      end
     end
   end
 
@@ -65,7 +71,7 @@ class BallotBoxesController < ApplicationController
       if ballot_box.destroy
         redirect_to ballot_boxes_path
       else
-        redirect_to ballot_box_path
+        redirect_to ballot_box_path(ballot_box)
       end
     end
   end
@@ -85,6 +91,10 @@ class BallotBoxesController < ApplicationController
 
   def tags_params
     params[:names]
+  end
+
+  def ballot_update_params
+    params.require(:ballot_box).permit(:supplement)
   end
 end
 
