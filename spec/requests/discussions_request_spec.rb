@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Discussions", type: :request do
   before do
-    @user = FactoryBot.create(:user)
-    @ballot_box = FactoryBot.create(:ballot_box)
-    @room = Room.create(ballot_box_id: @ballot_box.id)
-    @user_room = UserRoom.create(user_id: @user.id, room_id: @room.id)
+    user_room = FactoryBot.create(:user_room)
+    @user = user_room.user
+    @room = user_room.room
+    @ballot_box = @room.ballot_box
   end
 
   describe 'POST #create' do

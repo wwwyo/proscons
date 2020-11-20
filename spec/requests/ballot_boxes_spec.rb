@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "BallotBoxes", type: :request do
   before do
-    @user = FactoryBot.create(:user)
-    @ballot_box = FactoryBot.create(:ballot_box)
-    @tag = FactoryBot.create(:tag)
-    BallotTag.create(ballot_box_id: @ballot_box.id, tag_id: @tag.id)
-    Vote.create(result: true, user_id: @user.id, ballot_box_id: @ballot_box.id)
+    ballot_tag = FactoryBot.create(:ballot_tag)
+    @ballot_box = ballot_tag.ballot_box
+    @tag = ballot_tag.tag
+    @user = @ballot_box.user
+    Vote.create(result: 1, user_id: @user.id, ballot_box_id: @ballot_box.id)
   end
 
   describe 'GET #top' do
@@ -72,13 +72,14 @@ RSpec.describe "BallotBoxes", type: :request do
     context 'ログインしている時' do
       before do
         sign_in @user
+        @ballot_form = FactoryBot.build(:ballot_form)
       end
       it 'リダイレクトのレスポンスが返ってくる' do
-        post ballot_boxes_path, params: {ballot_form: {question: "abc", name: "abc"}}
+        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, name: @ballot_form.name}}
         expect(response.status).to eq 302
       end
       it 'リダイレクト先が:index' do
-        post ballot_boxes_path, params: {ballot_form: {question: "abc", name: "abc"}}
+        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, name: @ballot_form.name}}
         expect(response.header).to redirect_to ballot_boxes_path
       end
     end
@@ -113,8 +114,6 @@ RSpec.describe "BallotBoxes", type: :request do
     context 'ログインしているかつ、投票の作成者である時' do
       before do
         sign_in @user
-        @ballot_box = BallotBox.create(question: "abc", user_id: @user.id)
-        BallotTag.create(ballot_box_id: @ballot_box.id, tag_id: @tag.id)
       end
       it '正常にレスポンスが返ってくる' do
         get edit_ballot_box_path(@ballot_box)
@@ -131,6 +130,7 @@ RSpec.describe "BallotBoxes", type: :request do
     end
     context 'ログインしているが投票の作成者ではない時' do
       before do
+        @user = FactoryBot.create(:user)
         sign_in @user
       end
       it 'リダイレクトのレスポンスが返ってくる' do
@@ -157,6 +157,7 @@ RSpec.describe "BallotBoxes", type: :request do
   describe 'PATCH #update' do
     context 'ログインしているが投票の作成者ではない時' do
       before do
+        @user = FactoryBot.create(:user)
         sign_in @user
       end
       it 'リダイレクトのレスポンスが返ってくる' do
@@ -184,8 +185,6 @@ RSpec.describe "BallotBoxes", type: :request do
     context 'ログインしているかつ、投票の作成者である時' do
       before do
         sign_in @user
-        @ballot_box = BallotBox.create(question: "abc", user_id: @user.id)
-        BallotTag.create(ballot_box_id: @ballot_box.id, tag_id: @tag.id)
       end
       it 'リダイレクトのレスポンスが返ってくる' do
         delete ballot_box_path(@ballot_box)
@@ -198,6 +197,7 @@ RSpec.describe "BallotBoxes", type: :request do
     end
     context 'ログインしているが投票の作成者ではない時' do
       before do
+        @user = FactoryBot.create(:user)
         sign_in @user
       end
       it 'リダイレクトのレスポンスが返ってくる' do
