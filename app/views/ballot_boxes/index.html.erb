@@ -12,9 +12,9 @@
             <a href= <%= "/ballot_boxes/#{ballot_box.id}"%> class="p-0 btn btn-outline-dark" style="border: none;">
               <h5>投票する</h5>
             </a>
-            <div class="mb-1">
+            <div>
               <% ballot_box.ballot_tags.each do |tag_id| %>
-                <button type="button" class="btn btn-sm btn-outline-info hashtags"><%= "##{tag_id.tag.name}" %></button>
+                <button type="button" class="btn btn-sm btn-outline-info mb-1 hashtags"><%= "##{tag_id.tag.name}" %></button>
               <% end %>
             </div>
           </div>
