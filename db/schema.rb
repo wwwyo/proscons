@@ -14,11 +14,11 @@ ActiveRecord::Schema.define(version: 2020_11_20_031918) do
 
   create_table "ballot_boxes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "question", null: false
-    t.text "detail"
+    t.text "detail", null: false
+    t.text "supplement"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.text "supplement"
     t.index ["user_id"], name: "index_ballot_boxes_on_user_id"
   end
 
