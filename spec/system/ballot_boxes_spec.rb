@@ -61,6 +61,21 @@ RSpec.describe "BallotBoxの編集", type: :system do
   end
 end
 
+RSpec.describe "BallotBoxのアップデート", type: :system do
+  before do
+    ballot_tag = FactoryBot.create(:ballot_tag)
+    @ballot_box = ballot_tag.ballot_box
+  end
+  it 'ログインしておりかつ自分の投稿のときアップデートできる' do
+    sign_in(@ballot_box.user)
+    visit edit_ballot_box_path(@ballot_box)
+    fill_in 'supplement', with: Faker::Lorem.paragraph
+    expect{click_on('変更する')}.to change { BallotBox.count }.by(0)
+    expect(current_path).to eq ballot_box_path(@ballot_box)
+    have_content(@ballot_box.supplement)
+  end
+end
+
 RSpec.describe "BallotBoxの削除", type: :system do
   before do
     @ballot_box1 = FactoryBot.create(:ballot_box)
