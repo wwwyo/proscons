@@ -12,6 +12,7 @@ require("../vote.js")
 require("../like.js")
 require("../room.js")
 require("../side_content.js")
+require("../search.js")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
