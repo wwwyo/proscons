@@ -4,25 +4,29 @@
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
       <div class="mb-1" style="height: 82%; overflow: scroll;">
-        <%= form_with model: @tag, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
-          <fieldset disabled>
+        <%= form_with model: @ballot_box, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
+          <fieldset disabled style="width:70%;">
             <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :question, 'タイトル', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
               <%= f.text_field :question, class:"form-control form-control-lg", id:"question", placeholder:"質問タイトル", value: @ballot_box.question %>
             </div>
             <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :detail, '詳細', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
-              <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文", value: @ballot_box.detail%>
+              <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文", value: @ballot_box.detail %>
+            </div>
+            <div class="form-group mt-4" style="line-height: 100%;">
+              <%= f.label :name, 'ハッシュタグ', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
+              <% @tags.each do |tag_id| %>
+                <div class="input-group-prepend" style="width: 100%;">
+                  <div class="input-group-text">#</div>
+                  <%= f.text_field :name, class:"form-control", id:"tag", placeholder:"一つずつ入力", value: tag_id.tag.name %>
+                </div>
+              <% end %>
             </div>
           </fieldset>
-          <div class="form-group mt-4" style="line-height: 100%;">
-            <%= f.label :name, 'ハッシュタグ', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">必須</span>
-            <% @tags.each do |tag_id| %>
-              <div class="input-group-prepend" style="width: 100%;">
-                <div class="input-group-text">#</div>
-                <%= f.text_field :name, class:"form-control", id:"tag", placeholder:"一つずつ入力", value: tag_id.tag.name %>
-              </div>
-            <% end %>
+          <div class="form-group mt-4" style="line-height: 120%; width:70%;">
+            <%= f.label :supplement, '補足投稿', style:"font-size: 200%;" %>
+            <%= f.text_area :supplement, class:"form-control", id:"supplement", rows:"5",minlength: "10", placeholder:"補足本文(10文字以上の入力が必要です)", value: @ballot_box.supplement %>
           </div>
       </div>
           <a>
