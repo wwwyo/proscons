@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Votes", type: :request do
   before do
     @user = FactoryBot.create(:user)
-    @ballot_box = FactoryBot.create(:ballot_box)
-    Room.create(ballot_box_id: @ballot_box.id)
+    room = FactoryBot.create(:room)
+    @ballot_box = room.ballot_box
   end
 
   describe 'POST #create' do
@@ -52,8 +52,8 @@ RSpec.describe "Votes", type: :request do
     end
     context 'ログインしているが投票者本人ではない時' do
       before do
+        @user = FactoryBot.create(:user)
         sign_in @user
-        @vote = Vote.create(result: 1, user_id: @ballot_box.user_id, ballot_box_id: @ballot_box.id)
       end
       it 'リダイレクトのレスポンスが返ってくる' do
         patch  ballot_box_vote_path(@ballot_box, @vote)

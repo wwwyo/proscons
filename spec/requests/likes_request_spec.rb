@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "Likes", type: :request do
   before do
     @user = FactoryBot.create(:user)
-    @ballot_box = FactoryBot.create(:ballot_box)
-    @room = Room.create(ballot_box_id: @ballot_box.id)
-    @discussion = Discussion.create(comment: "abc", vote_result: true, user_id: @user.id, room_id: @room.id)
+    @discussion = FactoryBot.create(:discussion)
+    @room = @discussion.room
+    @ballot_box = @room.ballot_box
   end
   describe 'POST #create' do
     context 'ログインしたユーザーがいいねをつける時' do
