@@ -155,6 +155,19 @@ RSpec.describe "BallotBoxes", type: :request do
   end
 
   describe 'PATCH #update' do
+    context 'ログインしているかつ、投票の作成者である時' do
+      before do
+        sign_in @user
+      end
+      it 'リダイレクトのレスポンスが返ってくる' do
+        patch ballot_box_path(@ballot_box), params: { ballot_box: { supplement: Faker::Lorem.paragraph } }
+        expect(response.status).to eq 302
+      end
+      it 'リダイレクト先が:show' do
+        patch ballot_box_path(@ballot_box), params: { ballot_box: { supplement: Faker::Lorem.paragraph } }
+        expect(response.header).to redirect_to ballot_box_path(@ballot_box)
+      end
+    end
     context 'ログインしているが投票の作成者ではない時' do
       before do
         @user = FactoryBot.create(:user)

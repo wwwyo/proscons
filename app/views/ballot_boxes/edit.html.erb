@@ -5,7 +5,7 @@
       <%= render partial: "share/header", locals: { search: @search} %>
       <div class="mb-1" style="height: 82%; overflow: scroll;">
         <%= form_with model: @ballot_box, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
-          <fieldset disabled style="width:70%;">
+          <fieldset disabled style="width:80%;">
             <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :question, 'タイトル', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
               <%= f.text_field :question, class:"form-control form-control-lg", id:"question", placeholder:"質問タイトル", value: @ballot_box.question %>
@@ -24,9 +24,9 @@
               <% end %>
             </div>
           </fieldset>
-          <div class="form-group mt-4" style="line-height: 120%; width:70%;">
+          <div class="form-group mt-4" style="line-height: 120%; width:80%;">
             <%= f.label :supplement, '補足投稿', style:"font-size: 200%;" %>
-            <%= f.text_area :supplement, class:"form-control", id:"supplement", rows:"5",minlength: "10", placeholder:"補足本文(10文字以上の入力が必要です)", value: @ballot_box.supplement %>
+            <%= f.text_area :supplement, class:"form-control", id:"supplement", rows:"4",minlength: "10", placeholder:"補足本文(10文字以上の入力が必要です)", value: @ballot_box.supplement %>
           </div>
       </div>
           <a>
