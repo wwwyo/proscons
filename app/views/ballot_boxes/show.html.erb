@@ -3,18 +3,18 @@
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
-      <div class="mb-1" style="height: 82%; overflow: scroll;">
-        <form class="mt-4">
+      <div class="mb-1" style="height: 82%;overflow: scroll;">
+        <form class="mt-4" style="width:70%;">
           <fieldset disabled>
             <div class="form-group" style="line-height: 100%;">
               <label for="question" style="font-size: 200%;">タイトル</label>
               <input class="form-control form-control-lg" id="question" type="text" value="<%= @ballot_box.question%>">
             </div>
-            <div class="form-group mt-5" style="line-height: 100%;">
+            <div class="form-group mt-4" style="line-height: 100%;">
               <label for="detail" style="font-size: 200%;">詳細</label>
               <textarea class="form-control" id="detail" rows="3"><%= @ballot_box.detail %></textarea>
             </div>
-            <div class="form-group mt-5" style="line-height: 100%;">
+            <div class="form-group mt-4" style="line-height: 100%;">
               <label for="tag" style="font-size: 200%;">ハッシュタグ</label>
               <% @tags.each do |tag| %>
                 <div class="input-group-prepend" style="width: 100%;">
@@ -23,6 +23,12 @@
                 </div>
               <% end %>
             </div>
+            <% if @ballot_box.supplement.present? %>
+              <div class="form-group mt-5" style="line-height: 100%;">
+                <label for="supplement" style="font-size: 200%;">補足</label>
+                <textarea class="form-control" id="supplement"><%= @ballot_box.supplement %></textarea>
+              </div>
+            <% end %>
           </fieldset>
           <% if user_signed_in? && current_user.id == @ballot_box.user_id %>
             <%= link_to "編集する", edit_ballot_box_path(@ballot_box), class:"btn btn-danger mt-5", style: "width: 100%;" %>
