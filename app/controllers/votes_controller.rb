@@ -10,19 +10,19 @@ class VotesController < ApplicationController
   end
 
   def update
-    vote = Vote.find(params[:id])
-    if vote.user_id == current_user.id
-      if vote.result
-        vote.result = 0
-      else
-        vote.result = 1
-      end
-      vote.save
-      redirect_to ballot_box_rooms_path(params[:ballot_box_id])
+  vote = Vote.find_by(user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
+  if vote != nil
+    if vote.result
+      vote.result = 0
     else
-      redirect_to ballot_box_path(params[:ballot_box_id])
+      vote.result = 1
     end
+    vote.save
+    redirect_to ballot_box_rooms_path(params[:ballot_box_id])
+  else
+    redirect_to ballot_box_path(params[:ballot_box_id])
   end
+end
 
   private
   def vote_params
