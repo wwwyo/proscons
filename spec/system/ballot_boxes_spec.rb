@@ -12,6 +12,7 @@ RSpec.describe "BallotBoxの作成", type: :system do
       click_on('投票を作成する')
       expect(current_path).to eq new_ballot_box_path
       fill_in 'question', with: @ballot_box.question
+      fill_in 'detail', with: @ballot_box.detail
       fill_in 'tag', with: @tag.name
       expect{click_on('投票作成')}.to change { BallotBox.count }.by(1)
       expect(current_path).to eq ballot_boxes_path
@@ -20,6 +21,13 @@ RSpec.describe "BallotBoxの作成", type: :system do
     end
   end
   context 'ballot_boxを作成できない時' do
+    it 'ログインしているがフォームを異常に入力したとき' do
+      sign_in(@user)
+      click_on('投票を作成する')
+      expect(current_path).to eq new_ballot_box_path
+      click_on('投票作成')
+      expect(current_path).to eq ballot_boxes_path(@ballot_box)
+    end
     it 'ログインしていないとき(ゲスト)' do
       visit ballot_boxes_path
       click_on('投票を作成する')

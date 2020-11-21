@@ -5,6 +5,7 @@ class BallotForm
 
   with_options presence: true do
     validates :question
+    validates :detail, length: { minimum: 5 }
     validates :name
   end
 

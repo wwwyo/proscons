@@ -9,7 +9,7 @@ ja:
       user:
         nickname: ニックネーム
       ballot_box:
-        question: 質問
+        question: 質問のタイトル
         detail: 詳細
       tag:
         name: ハッシュタグ
@@ -21,5 +21,6 @@ ja:
     attributes:
       ballot_form:
         question: 質問のタイトル
+        detail: 詳細
         name: ハッシュタグ
   

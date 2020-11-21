@@ -9,10 +9,6 @@ RSpec.describe BallotForm, type: :model do
       it 'タイトル、詳細、ハッシュタグ全ての入力欄に記入する'do
         expect(@ballot_form).to be_valid
       end
-      it '詳細を空欄、その他の入力欄全てに記入する' do
-        @ballot_form.detail = ""
-        expect(@ballot_form).to be_valid
-      end
       it '入力したタグが既に存在している' do
         @ballot_form.save
         ballot_form_test = FactoryBot.build(:ballot_form)
@@ -25,6 +21,16 @@ RSpec.describe BallotForm, type: :model do
         @ballot_form.question = ""
         @ballot_form.valid?
         expect(@ballot_form.errors.full_messages).to include("質問のタイトルを入力してください")
+      end
+      it '詳細が空欄' do
+        @ballot_form.detail = ""
+        @ballot_form.valid?
+        expect(@ballot_form.errors.full_messages).to include("詳細を入力してください")
+      end
+      it '詳細が5文字未満' do
+        @ballot_form.detail = "1234"
+        @ballot_form.valid?
+        expect(@ballot_form.errors.full_messages).to include("詳細は5文字以上で入力してください")
       end
       it 'ハッシュタグが空欄' do
         @ballot_form.name = ""

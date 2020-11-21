@@ -1,4 +1,4 @@
-if (location.pathname.match("ballot_boxes\$|/popular")){
+if (location.pathname.match("ballot_boxes\$|/popular|/\[0-9]\+\$")){
   document.addEventListener("DOMContentLoaded", () => {
     const hashtags = document.querySelectorAll(".hashtags");
     if (hashtags != null ){
