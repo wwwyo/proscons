@@ -10,9 +10,9 @@
         <div class="d-flex" id="<%= @vote.result if user_signed_in? %>">
           <% if user_signed_in? %>
             <% if @vote.result %>
-              <a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-sm btn-outline-success" id="change-vote">あなたの意見：賛成</a>
+              <a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-sm btn-outline-success" id="change-vote">賛成</a>
             <% else %>
-              <a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-sm btn-outline-primary" id="change-vote">あなたの意見：反対</a>
+              <a href="<%= ballot_box_vote_path(@ballot_room, @vote) %>" data-method="patch" class="mr-3 btn btn-sm btn-outline-primary" id="change-vote">反対</a>
             <% end %>
           <% end %>
           <p class="btn btn-sm btn-outline-secondary mb-0 info" data-toggle="dropdown">i
@@ -94,7 +94,7 @@
         </div>
       <% else %>
         <a href="/users/sign_in" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 10%;">
-          <div style="font-size: 200%">
+          <div style="font-size: 150%">
             コメントするにはログインしてください
           </div>
         </a>

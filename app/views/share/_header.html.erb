@@ -2,7 +2,7 @@
   <div class="container m-0 d-flex align-items-center justify-content-between">
     <%= search_form_for search, url: ballot_boxes_path do |f| %>
       <div class="d-flex" style="width:50vw;">
-        <%= f.search_field :name_cont, class:"form-control form-control-sm", placeholder:"#投票を検索"%>
+        <%= f.search_field :name_cont, class:"form-control form-control-sm", placeholder:"#タグ検索"%>
         <%= f.submit "検索", class: "border btn btn-sm btn-outline-secondary"%>
       </div>
     <% end %>

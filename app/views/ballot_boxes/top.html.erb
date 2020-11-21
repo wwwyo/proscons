@@ -1,18 +1,18 @@
 <div class="bg-light" style="width: 100vw; height: 100vh;">
   <div style="padding:5% 15% 0;">
-    <h1 class="display-2">Proscons</h1>
-    <h1 class="display-2">respect you will</h1>
+    <h1 class="display-2" style="font-family:Hiragino Mincho ProN;">Proscons</h1>
+    <h1 class="display-2" style="font-family:Hiragino Mincho ProN;">respect you will</h1>
     <p class="lead mt-4 pb-3 border-bottom">Prosconsはあなたの意思を尊重します</p>
   
   <div class="mt-5">
     <div class="mt-2">
-      <%= link_to "アカウント作成", new_user_registration_path, class: "btn btn-primary btn-lg", style:"width:30%;"%>
+      <%= link_to "アカウント作成", new_user_registration_path, class: "btn btn-light btn-lg pl-0 border-bottom", style: "text-decoration: none;"%>
     </div>
-    <div class="mt-3">
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn-link btn-lg pl-0" %>
+    <div class="mt-2">
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-light btn-lg pl-0 border-bottom", style: "text-decoration: none;" %>
     </div>
-    <div class="mt-0">
-      <%= link_to "ゲストログイン", ballot_boxes_path, class: "btn btn-light btn-lg pl-0", style: "text-decoration: none;"%>
+    <div class="mt-2">
+      <%= link_to "ゲストログイン", ballot_boxes_path, class: "btn btn-light btn-lg pl-0 border-bottom", style: "text-decoration: none;"%>
     </div>
   </div>
   <div>

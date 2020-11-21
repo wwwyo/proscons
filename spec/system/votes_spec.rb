@@ -15,7 +15,7 @@ RSpec.describe '投票の実行', type: :system do
       expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
       expect(page).to have_link(@ballot_box.question, href: ballot_box_path(@ballot_box))
       expect(page).to have_link(@ballot_box.question, href: ballot_box_rooms_path(@ballot_box))
-      expect(page).to have_content('あなたの意見：賛成')
+      expect(page).to have_link('賛成')
     end
     it 'ログインしており、かつまだ投票していない投票箱に反対する' do
       sign_in(@user)
@@ -24,7 +24,7 @@ RSpec.describe '投票の実行', type: :system do
       expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
       expect(page).to have_link(@ballot_box.question, href: ballot_box_path(@ballot_box))
       expect(page).to have_link(@ballot_box.question, href: ballot_box_rooms_path(@ballot_box))
-      expect(page).to have_content('あなたの意見：反対')
+      expect(page).to have_link('反対')
     end
   end
   context '投票ができない時' do
