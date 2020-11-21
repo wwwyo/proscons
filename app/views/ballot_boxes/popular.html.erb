@@ -12,14 +12,14 @@
           <% end %>
           <div class="border btn btn-sm btn-outline-secondary" data-toggle="dropdown">?</div>
           <div class="dropdown-menu">
-            <p class="dropdown-item">
-              <b>Prosconsはあなたの意見を尊重します。</b>
+            <p class="dropdown-item mb-0">
+              <b class="border-bottom">Prosconsはあなたの意見を尊重します。</b>
               <br>[step1]投票を作成しよう
               <br>[step2]賛成か反対を投票しよう
               <br>[step3]チャンネルで発言しよう
               <br>[step4]意見にいいねを押そう
               <br>
-              <br>*いいねの数に応じて投票数が変化します
+              <br>*コメントのいいねが10を超えると投票数が増えます
             </p>
           </div>
         </div>
@@ -28,8 +28,8 @@
         <% @ballot_boxes.each do |ballot_box| %>
           <div class="my-4 border-bottom"style="width:100%;">
             <h5 class="mb-0"><b><%= ballot_box.question %></b></h5>
-            <p class="mb-0" style="font-size: 50%;"><%= "投票数：#{ballot_box.votes.count}" %></p>
-            <p class="mb-1" style="font-size: 50%;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
+            <p class="mb-0" style="font-size: 50%;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
+            <p class="mb-1" style="font-size: 50%;"><%= "投票数：#{ballot_box.votes.count}" %></p>
             <a href= <%= "/ballot_boxes/#{ballot_box.id}"%> class="p-0 btn btn-outline-dark" style="border: none;">
               <h5>投票する</h5>
             </a>
