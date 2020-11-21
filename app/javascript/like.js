@@ -25,7 +25,7 @@ function loadDocument(){
         }else{
           XHR.open("POST",`/ballot_boxes/${ballotBoxId}/rooms/${ballotBoxId}/discussions/${discussionNum}/likes`, true);
           XHR.responseType = 'json';
-          XHR.send(discussionNum);
+          XHR.send();
           XHR.onload = () =>{
             if (XHR.status == 204) {
               likeBtn.setAttribute("style", "color: blue;");
