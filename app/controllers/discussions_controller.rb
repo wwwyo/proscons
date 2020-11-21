@@ -7,8 +7,9 @@ class DiscussionsController < ApplicationController
     end
   end
 
-  private 
+  private
+
   def discussion_params
-    params.require(:discussion).permit(:vote_result, :comment ).merge(user_id: current_user.id, room_id: params[:room_id])
+    params.require(:discussion).permit(:vote_result, :comment).merge(user_id: current_user.id, room_id: params[:room_id])
   end
 end

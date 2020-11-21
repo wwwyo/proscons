@@ -9,7 +9,7 @@ RSpec.describe Vote, type: :model do
       expect(@vote).to be_valid
     end
     it 'resultに0が入っていると保存される' do
-      @vote.result = "0"
+      @vote.result = '0'
       expect(@vote).to be_valid
     end
   end

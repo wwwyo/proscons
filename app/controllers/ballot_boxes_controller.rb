@@ -6,13 +6,13 @@ class BallotBoxesController < ApplicationController
   def top
     redirect_to action: :index if user_signed_in?
   end
-  
+
   def index
-    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: {tag_id: @search.result.ids}).order(created_at: :desc)
+    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: { tag_id: @search.result.ids }).order(created_at: :desc)
   end
 
   def popular
-    @ballot_boxes =  BallotBox.includes(ballot_tags: :tag).joins(:votes).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: {tag_id: @search.result.ids}).order(Arel.sql('count(ballot_boxes.id) desc'))
+    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:votes).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: { tag_id: @search.result.ids }).order(Arel.sql('count(ballot_boxes.id) desc'))
   end
 
   def new
@@ -24,7 +24,7 @@ class BallotBoxesController < ApplicationController
     if @ballot_form.valid?
       ballot_box_id = @ballot_form.save
       if tags = tags_params
-        tags.each do |tag, name| 
+        tags.each do |_tag, name|
           tag_add = Tag.where(name: name).first_or_create
           BallotTag.create(ballot_box_id: ballot_box_id, tag_id: tag_add.id)
         end
@@ -45,36 +45,33 @@ class BallotBoxesController < ApplicationController
   def edit
     @ballot_box = BallotBox.find(params[:id])
     @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
-    unless @ballot_box.user_id == current_user.id
-      redirect_to ballot_box_path(@ballot_box)
-    end
+    redirect_to ballot_box_path(@ballot_box) unless @ballot_box.user_id == current_user.id
   end
 
   def update
     ballot_box = BallotBox.find(params[:id])
-    unless ballot_box.user_id == current_user.id
-      redirect_to ballot_box_path(ballot_box)
+    if ballot_box.user_id == current_user.id
+      redirect_to ballot_box_path(ballot_box) if ballot_box.update(ballot_update_params)
     else
-      if ballot_box.update(ballot_update_params)
-        redirect_to ballot_box_path(ballot_box)
-      end
+      redirect_to ballot_box_path(ballot_box)
     end
   end
 
   def destroy
     ballot_box = BallotBox.find(params[:id])
-    unless ballot_box.user_id == current_user.id
-      redirect_to ballot_box_path
-    else
+    if ballot_box.user_id == current_user.id
       if ballot_box.destroy
         redirect_to ballot_boxes_path
       else
         redirect_to ballot_box_path(ballot_box)
       end
+    else
+      redirect_to ballot_box_path
     end
   end
 
   private
+
   def room_name
     @user_rooms = current_user.user_rooms.includes(:room).order(created_at: :desc)
   end
@@ -95,4 +92,3 @@ class BallotBoxesController < ApplicationController
     params.require(:ballot_box).permit(:supplement)
   end
 end
-

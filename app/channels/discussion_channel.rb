@@ -1,6 +1,6 @@
 class DiscussionChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "discussion_channel"
+    stream_from 'discussion_channel'
   end
 
   def unsubscribed
