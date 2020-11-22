@@ -5,18 +5,14 @@ class LikesController < ApplicationController
   def create
     like = Like.new(user_id: current_user.id, discussion_id: params[:discussion_id])
     if like.save
-      if Like.where(discussion_id: like.discussion_id).count == 10
-        Vote.create(result: like.discussion.vote_result, user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
-      end
+      Like.like_10_create(like.discussion, params[:ballot_box_id])
     end
   end
 
   def destroy
     like = Like.find_by(user_id: current_user.id, discussion_id: params[:discussion_id])
-    like.destroy
-    if Like.where(discussion_id: like.discussion_id).count == 9
-      vote = Vote.find_by(result: like.discussion.vote_result, user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
-      vote.destroy
+    if like.destroy
+      Like.like_10_destroy(like.discussion, params[:ballot_box_id])
     end
   end
 end
