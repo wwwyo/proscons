@@ -1,7 +1,9 @@
 class RoomsController < ApplicationController
+  include Share
+
   before_action :authenticate_user!, only: [:destroy]
-  before_action :room_name, if: :user_signed_in?
-  before_action :search
+  before_action :share
+
   def index
     @ballot_room = BallotBox.find(params[:ballot_box_id])
     @discussion = Discussion.new
@@ -23,11 +25,7 @@ class RoomsController < ApplicationController
 
   private
 
-  def room_name
-    @user_rooms = current_user.user_rooms.includes(:room).order(created_at: :desc)
-  end
-
-  def search
-    @search = Tag.ransack(params[:q])
+  def share
+    share_content
   end
 end
