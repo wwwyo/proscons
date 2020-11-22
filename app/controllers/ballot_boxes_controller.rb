@@ -15,7 +15,7 @@ class BallotBoxesController < ApplicationController
   end
 
   def popular
-    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:votes).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: { tag_id: @search.result.ids }).order(Arel.sql('count(ballot_boxes.id) desc'))
+    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags, :votes).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: { tag_id: @search.result.ids }).order(Arel.sql('count(ballot_boxes.id) desc'))
   end
 
   def new
