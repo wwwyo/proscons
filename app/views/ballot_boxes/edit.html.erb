@@ -4,6 +4,9 @@
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
       <div class="mb-1" style="height: 82%; overflow: scroll;">
+        <% if flash[:alert].present? %>
+          <p class="text-danger pt-4"><%= flash.now[:alert] %></p>
+        <% end %>
         <%= form_with model: @ballot_box, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
           <fieldset disabled style="width:80%;">
             <div class="form-group mt-4" style="line-height: 100%;">

@@ -4,12 +4,15 @@
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
       <div class="mb-1" style="height: 82%;overflow: scroll;">
+        <% if flash[:alert].present? %>
+          <p class="text-danger pt-4"><%= flash.now[:alert] %></p>
+        <% end %>
         <div class="mt-4" style="width:80%;">
           <h2 class="border-bottom pb-2"><b><%= @ballot_box.question %></b></h2>
           <p class="mb-0 text-secondary" style="font-size: 80%;"><%= "作成日：#{ @ballot_box.created_at.strftime('%Y/%m/%d') }" %></p>
           <p class="text-secondary" style="font-size: 80%;"><%= "投票数：#{ @votes.count }" %></p>
-          <% @tags.each do |tag| %>
-            <button class="btn btn-outline-info mr-1 mb-2 hashtags"><%= "##{tag.tag.name}" %></button>
+          <% @tags.each do |tag_id| %>
+            <button class="btn btn-outline-info mr-1 mb-2 hashtags"><%= "##{tag_id.tag.name}" %></button>
           <% end %>
           <div class="mt-3 py-3 border-top ">
             <h5><b>詳細</b></h5>

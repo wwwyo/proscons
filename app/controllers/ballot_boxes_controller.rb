@@ -1,7 +1,10 @@
 class BallotBoxesController < ApplicationController
+  include Share
+
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :room_name, except: :top, if: :user_signed_in?
-  before_action :search
+  before_action :share, except: :top
+  before_action :summary_ballot_box, only: [:show, :edit, :update, :destroy]
+  before_action :user_check, only: [:edit, :update, :destroy]
 
   def top
     redirect_to action: :index if user_signed_in?
@@ -23,12 +26,7 @@ class BallotBoxesController < ApplicationController
     @ballot_form = BallotForm.new(ballot_params)
     if @ballot_form.valid?
       ballot_box_id = @ballot_form.save
-      if tags = tags_params
-        tags.each do |_tag, name|
-          tag_add = Tag.where(name: name).first_or_create
-          BallotTag.create(ballot_box_id: ballot_box_id, tag_id: tag_add.id)
-        end
-      end
+      Tag.add_tag(tags_params, ballot_box_id) if tags_params.present?
       redirect_to ballot_boxes_path
     else
       render :new
@@ -36,48 +34,35 @@ class BallotBoxesController < ApplicationController
   end
 
   def show
-    @ballot_box = BallotBox.find(params[:id])
-    @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
     @vote = Vote.new
+    @tags = @ballot_box.ballot_tags.includes(:tag)
     @votes = @ballot_box.votes
   end
 
   def edit
-    @ballot_box = BallotBox.find(params[:id])
-    @tags = BallotTag.where(ballot_box_id: @ballot_box.id).includes(:tag)
-    redirect_to ballot_box_path(@ballot_box) unless @ballot_box.user_id == current_user.id
   end
 
   def update
-    ballot_box = BallotBox.find(params[:id])
-    if ballot_box.user_id == current_user.id
-      redirect_to ballot_box_path(ballot_box) if ballot_box.update(ballot_update_params)
+    if @ballot_box.update(ballot_update_params)
+      redirect_to ballot_box_path(@ballot_box)
     else
-      redirect_to ballot_box_path(ballot_box)
+      render :edit, flash: {alert: "編集できませんでした"}
     end
   end
 
   def destroy
-    ballot_box = BallotBox.find(params[:id])
-    if ballot_box.user_id == current_user.id
-      if ballot_box.destroy
-        redirect_to ballot_boxes_path
-      else
-        redirect_to ballot_box_path(ballot_box)
-      end
+    if @ballot_box.destroy
+      redirect_to ballot_boxes_path
     else
-      redirect_to ballot_box_path
+      @votes = @ballot_box.votes
+      render :show, flash: {alert: "削除できませんでした"}
     end
   end
 
   private
 
-  def room_name
-    @user_rooms = current_user.user_rooms.includes(:room).order(created_at: :desc)
-  end
-
-  def search
-    @search = Tag.ransack(params[:q])
+  def share
+    share_content
   end
 
   def ballot_params
@@ -90,5 +75,16 @@ class BallotBoxesController < ApplicationController
 
   def ballot_update_params
     params.require(:ballot_box).permit(:supplement)
+  end
+
+  def summary_ballot_box
+    @ballot_box = BallotBox.find(params[:id])
+  end
+
+  def user_check
+    if @ballot_box.user_id != current_user.id
+      return redirect_to ballot_box_path(@ballot_box)
+    end
+    @tags = @ballot_box.ballot_tags.includes(:tag)
   end
 end
