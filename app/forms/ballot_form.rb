@@ -1,5 +1,4 @@
 class BallotForm
-
   include ActiveModel::Model
   attr_accessor :question, :detail, :name, :user_id
 

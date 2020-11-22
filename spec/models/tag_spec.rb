@@ -16,9 +16,9 @@ RSpec.describe Tag, type: :model do
     end
     context '追加したタグの入力欄に空欄があると作成できない' do
       it 'ハッシュタグを追加し、追加したハッシュタグ入力欄が空欄' do
-        @tag.name = ""
+        @tag.name = ''
         @tag.valid?
-        expect(@tag.errors.full_messages).to include("ハッシュタグを入力してください")
+        expect(@tag.errors.full_messages).to include('ハッシュタグを入力してください')
       end
     end
   end

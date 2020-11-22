@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "BallotBoxes", type: :request do
+RSpec.describe 'BallotBoxes', type: :request do
   before do
     ballot_tag = FactoryBot.create(:ballot_tag)
     @ballot_box = ballot_tag.ballot_box
@@ -48,7 +48,7 @@ RSpec.describe "BallotBoxes", type: :request do
 
   describe 'GET #new' do
     context 'ログインしている時' do
-      before do 
+      before do
         sign_in @user
       end
       it '正常にレスポンスが返ってくる' do
@@ -75,11 +75,11 @@ RSpec.describe "BallotBoxes", type: :request do
         @ballot_form = FactoryBot.build(:ballot_form)
       end
       it 'リダイレクトのレスポンスが返ってくる' do
-        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, detail: @ballot_form.detail, name: @ballot_form.name}}
+        post ballot_boxes_path, params: { ballot_form: { question: @ballot_form.question, detail: @ballot_form.detail, name: @ballot_form.name } }
         expect(response.status).to eq 302
       end
       it 'リダイレクト先が:index' do
-        post ballot_boxes_path, params: {ballot_form: {question: @ballot_form.question, detail: @ballot_form.detail, name: @ballot_form.name}}
+        post ballot_boxes_path, params: { ballot_form: { question: @ballot_form.question, detail: @ballot_form.detail, name: @ballot_form.name } }
         expect(response.header).to redirect_to ballot_boxes_path
       end
     end
@@ -190,7 +190,7 @@ RSpec.describe "BallotBoxes", type: :request do
       it 'リダイレクト先が:sign_in' do
         patch ballot_box_path(@ballot_box)
         expect(response.header).to redirect_to new_user_session_path
-      end 
+      end
     end
   end
 
@@ -230,7 +230,7 @@ RSpec.describe "BallotBoxes", type: :request do
       it 'リダイレクト先が:sign_in' do
         delete ballot_box_path(@ballot_box)
         expect(response.header).to redirect_to new_user_session_path
-      end 
+      end
     end
   end
 end

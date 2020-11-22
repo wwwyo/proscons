@@ -4,15 +4,18 @@
     <div class="col-9" style="height: 100vh;">
       <%= render partial: "share/header", locals: { search: @search} %>
       <div class="mb-1" style="height: 82%; overflow: scroll;">
+        <% if flash[:alert].present? %>
+          <p class="text-danger pt-4"><%= flash.now[:alert] %></p>
+        <% end %>
         <%= form_with model: @ballot_box, url: ballot_box_path(@ballot_box), method: :patch, local: true do |f|%>
           <fieldset disabled style="width:80%;">
             <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :question, 'タイトル', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
-              <%= f.text_field :question, class:"form-control form-control-lg", id:"question", placeholder:"質問タイトル", value: @ballot_box.question %>
+              <%= f.text_field :question, class:"form-control form-control-lg", id:"question", placeholder:"質問タイトル", value: question %>
             </div>
             <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :detail, '詳細', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
-              <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文", value: @ballot_box.detail %>
+              <%= f.text_area :detail, class:"form-control", id:"detail", rows:"3", placeholder:"質問本文", value: detail %>
             </div>
             <div class="form-group mt-4" style="line-height: 100%;">
               <%= f.label :name, 'ハッシュタグ', style:"font-size: 200%;" %><span class="badge badge-danger ml-2">変更できません</span>
@@ -26,7 +29,7 @@
           </fieldset>
           <div class="form-group mt-4" style="line-height: 120%; width:80%;">
             <%= f.label :supplement, '補足投稿', style:"font-size: 200%;" %>
-            <%= f.text_area :supplement, class:"form-control", id:"supplement", rows:"4",minlength: "10", placeholder:"補足本文(10文字以上の入力が必要です)", value: @ballot_box.supplement %>
+            <%= f.text_area :supplement, class:"form-control", id:"supplement", rows:"4",minlength: "10", placeholder:"補足本文(10文字以上の入力が必要です)", value: supplement %>
           </div>
       </div>
           <a>

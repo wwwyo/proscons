@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "チャンネル内でのコメント", type: :system do
+RSpec.describe 'チャンネル内でのコメント', type: :system do
   before do
     user_room = FactoryBot.create(:user_room)
     @user = user_room.user
@@ -14,13 +14,13 @@ RSpec.describe "チャンネル内でのコメント", type: :system do
       sign_in(@user)
       visit ballot_box_rooms_path(@ballot_box)
       fill_in 'discussion_comment', with: @discussion.comment
-      expect{
+      expect  do
         click_on('投稿')
         have_content(@discussion_comment)
         have_content("#{@user_nickname}:賛成")
-        have_content("いいね！")
+        have_content('いいね！')
         sleep 0.1
-      }.to change{ Discussion.count }.by(1) 
+      end.to change { Discussion.count }.by(1)
       expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
     end
     it 'ログインをしており反対に投票している時' do
@@ -28,13 +28,13 @@ RSpec.describe "チャンネル内でのコメント", type: :system do
       sign_in(@user)
       visit ballot_box_rooms_path(@ballot_box)
       fill_in 'discussion_comment', with: @discussion.comment
-      expect{
+      expect  do
         click_on('投稿')
         have_content(@discussion_comment)
         have_content("#{@user_nickname}:反対")
-        have_content("いいね！")
+        have_content('いいね！')
         sleep 0.1
-      }.to change{ Discussion.count }.by(1) 
+      end.to change { Discussion.count }.by(1)
       expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
     end
   end
@@ -42,7 +42,7 @@ RSpec.describe "チャンネル内でのコメント", type: :system do
     it 'ログインをしていない' do
       visit ballot_box_rooms_path(@ballot_box)
       expect(page).to have_link('コメントするにはログインしてください', href: new_user_session_path)
-      expect(page).to have_no_link('投稿',href: ballot_box_room_discussions_path(@ballot_box, @room))
+      expect(page).to have_no_link('投稿', href: ballot_box_room_discussions_path(@ballot_box, @room))
     end
   end
 end

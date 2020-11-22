@@ -6,7 +6,7 @@
         <div class="container m-0 d-flex align-items-center justify-content-between">
           <%= search_form_for @search, url: popular_ballot_boxes_path do |f| %>
             <div class="d-flex" style="width:50vw;">
-              <%= f.search_field :name_cont, class:"form-control form-control-sm", placeholder:"#投票を検索"%>
+              <%= f.search_field :name_cont, class:"form-control form-control-sm", placeholder:"#タグ検索"%>
               <%= f.submit "検索", class: "border btn btn-sm btn-outline-secondary"%>
             </div>
           <% end %>
@@ -25,24 +25,10 @@
         </div>
       </div>
       <div class="my-1" style="height: 82%; overflow: scroll;">
-        <% @ballot_boxes.each do |ballot_box| %>
-          <div class="my-4 border-bottom"style="width:100%;">
-            <h5 class="mb-0"><b><%= ballot_box.question %></b></h5>
-            <p class="mb-0" style="font-size: 50%;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
-            <p class="mb-1" style="font-size: 50%;"><%= "投票数：#{ballot_box.votes.count}" %></p>
-            <a href= <%= "/ballot_boxes/#{ballot_box.id}"%> class="p-0 btn btn-outline-dark" style="border: none;">
-              <h5>投票する</h5>
-            </a>
-            <div>
-              <% ballot_box.ballot_tags.each do |tag_id| %>
-                <button type="button" class="btn btn-sm btn-outline-info mb-1 hashtags"><%= "##{tag_id.tag.name}" %></button>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: "share/repeat", locals: {ballot_boxes: @ballot_boxes} %>
       </div>
       <a href="/ballot_boxes/new" class="container  btn btn-outline-danger d-flex justify-content-center align-items-center" style="height: 10%;">
-        <div style="font-size: 200%">
+        <div style="font-size: 200%;">
           投票を作成する
         </div>
       </a>

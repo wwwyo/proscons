@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "いいね作成機能", type: :system do
+RSpec.describe 'いいね作成機能', type: :system do
   before do
     @discussion = FactoryBot.create(:discussion)
     @user = @discussion.user
@@ -12,27 +12,27 @@ RSpec.describe "いいね作成機能", type: :system do
     it 'ログインしているユーザー' do
       sign_in(@user)
       visit ballot_box_rooms_path(@ballot_box)
-      expect{
+      expect  do
         sleep 1
         find('.like').click
         sleep 0.5
-      }.to change { Like.count }.by(1)
+      end.to change { Like.count }.by(1)
       expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
     end
   end
   context 'いいねをつけることができない' do
     it 'ログインしていないユーザー' do
       visit ballot_box_rooms_path(@ballot_box)
-      expect{
+      expect  do
         sleep 1
         find('.like').click
         sleep 0.5
-      }.to change { Like.count }.by(0)
+      end.to change { Like.count }.by(0)
     end
   end
 end
 
-RSpec.describe "いいね削除機能", type: :system do
+RSpec.describe 'いいね削除機能', type: :system do
   before do
     @like = FactoryBot.create(:like)
     @user = @like.user
@@ -44,27 +44,27 @@ RSpec.describe "いいね削除機能", type: :system do
     it 'ログインしているユーザー' do
       sign_in(@user)
       visit ballot_box_rooms_path(@ballot_box)
-      expect{
+      expect  do
         sleep 1
         find('.like').click
         sleep 0.5
-      }.to change { Like.count }.by(-1)
+      end.to change { Like.count }.by(-1)
       expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
     end
   end
   context 'いいねを削除できない' do
     it 'ログインしていないユーザー' do
       visit ballot_box_rooms_path(@ballot_box)
-      expect{
+      expect  do
         sleep 1
         find('.like').click
         sleep 0.5
-      }.to change { Like.count }.by(0)
+      end.to change { Like.count }.by(0)
     end
   end
 end
 
-RSpec.describe "いいねの数と投票の関係", type: :system do
+RSpec.describe 'いいねの数と投票の関係', type: :system do
   before do
     @discussion = FactoryBot.create(:discussion)
     @user = @discussion.user
@@ -81,23 +81,23 @@ RSpec.describe "いいねの数と投票の関係", type: :system do
   it 'いいねが９から10になったとき投票数が増える' do
     sign_in(@user)
     visit ballot_box_rooms_path(@ballot_box)
-    expect{
+    expect  do
       sleep 1
       find('.like').click
       sleep 0.5
-    }.to change { Vote.count }.by(1)
+    end.to change { Vote.count }.by(1)
     expect(current_path).to eq ballot_box_rooms_path(@ballot_box)
     visit ballot_box_rooms_path(@ballot_box)
-    expect(page).to have_content("投票数：11")
+    expect(page).to have_content('投票数：11')
   end
   it 'いいねが10から9になったとき投票数が減る' do
     Like.create(user_id: @user.id, discussion_id: @discussion.id)
     sign_in(@user)
     visit ballot_box_rooms_path(@ballot_box)
-    expect{
+    expect  do
       sleep 1
       find('.like').click
       sleep 0.5
-    }.to change { Vote.count }.by(-1)
+    end.to change { Vote.count }.by(-1)
   end
 end

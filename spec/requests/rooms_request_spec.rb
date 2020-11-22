@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Rooms", type: :request do
+RSpec.describe 'Rooms', type: :request do
   before do
     user_room = FactoryBot.create(:user_room)
     @user = user_room.user
@@ -39,5 +39,4 @@ RSpec.describe "Rooms", type: :request do
       end
     end
   end
-
 end

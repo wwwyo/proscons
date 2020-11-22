@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "BallotBoxの作成", type: :system do
+RSpec.describe 'BallotBoxの作成', type: :system do
   before do
     @user = FactoryBot.create(:user)
     @ballot_box = FactoryBot.build(:ballot_box)
@@ -14,7 +14,7 @@ RSpec.describe "BallotBoxの作成", type: :system do
       fill_in 'question', with: @ballot_box.question
       fill_in 'detail', with: @ballot_box.detail
       fill_in 'tag', with: @tag.name
-      expect{click_on('投票作成')}.to change { BallotBox.count }.by(1)
+      expect { click_on('投票作成') }.to change { BallotBox.count }.by(1)
       expect(current_path).to eq ballot_boxes_path
       expect(page).to have_content(@ballot_box.question)
       expect(page).to have_content(@tag.name)
@@ -36,7 +36,7 @@ RSpec.describe "BallotBoxの作成", type: :system do
   end
 end
 
-RSpec.describe "BallotBoxの編集", type: :system do
+RSpec.describe 'BallotBoxの編集', type: :system do
   before do
     @ballot_box1 = FactoryBot.create(:ballot_box)
     @ballot_box2 = FactoryBot.create(:ballot_box)
@@ -64,12 +64,12 @@ RSpec.describe "BallotBoxの編集", type: :system do
       visit ballot_boxes_path
       all('.ballot_box')[0].click_on('投票する')
       expect(current_path).to eq ballot_box_path(@ballot_box2)
-      expect(page).to have_no_link('編集する',href: edit_ballot_box_path(@ballot_box2))
+      expect(page).to have_no_link('編集する', href: edit_ballot_box_path(@ballot_box2))
     end
   end
 end
 
-RSpec.describe "BallotBoxのアップデート", type: :system do
+RSpec.describe 'BallotBoxのアップデート', type: :system do
   before do
     ballot_tag = FactoryBot.create(:ballot_tag)
     @ballot_box = ballot_tag.ballot_box
@@ -78,13 +78,13 @@ RSpec.describe "BallotBoxのアップデート", type: :system do
     sign_in(@ballot_box.user)
     visit edit_ballot_box_path(@ballot_box)
     fill_in 'supplement', with: Faker::Lorem.paragraph
-    expect{click_on('変更する')}.to change { BallotBox.count }.by(0)
+    expect { click_on('変更する') }.to change { BallotBox.count }.by(0)
     expect(current_path).to eq ballot_box_path(@ballot_box)
     have_content(@ballot_box.supplement)
   end
 end
 
-RSpec.describe "BallotBoxの削除", type: :system do
+RSpec.describe 'BallotBoxの削除', type: :system do
   before do
     @ballot_box1 = FactoryBot.create(:ballot_box)
     @ballot_box2 = FactoryBot.create(:ballot_box)
@@ -97,7 +97,7 @@ RSpec.describe "BallotBoxの削除", type: :system do
       sign_in(@ballot_box1.user)
       all('.ballot_box')[1].click_on('投票する')
       expect(current_path).to eq ballot_box_path(@ballot_box1)
-      expect{click_on('削除する')}.to change { BallotBox.count }.by(-1)
+      expect { click_on('削除する') }.to change { BallotBox.count }.by(-1)
       expect(current_path).to eq ballot_boxes_path
       have_no_content(@ballot_box1.question)
     end
@@ -118,7 +118,7 @@ RSpec.describe "BallotBoxの削除", type: :system do
   end
 end
 
-RSpec.describe "タグの検索", type: :system do
+RSpec.describe 'タグの検索', type: :system do
   before do
     @ballot_box1 = FactoryBot.create(:ballot_box)
     @ballot_box2 = FactoryBot.create(:ballot_box)

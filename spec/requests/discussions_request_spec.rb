@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Discussions", type: :request do
+RSpec.describe 'Discussions', type: :request do
   before do
     user_room = FactoryBot.create(:user_room)
     @user = user_room.user
@@ -14,7 +14,7 @@ RSpec.describe "Discussions", type: :request do
         sign_in @user
       end
       it '正常にレスポンスが返ってくる' do
-        post ballot_box_room_discussions_path(@ballot_box, @room), params: {discussion: {vote_result: true, comment: Faker::Lorem.paragraph}}
+        post ballot_box_room_discussions_path(@ballot_box, @room), params: { discussion: { vote_result: true, comment: Faker::Lorem.paragraph } }
         expect(response.status).to eq 204
       end
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Likes", type: :request do
+RSpec.describe 'Likes', type: :request do
   before do
     @user = FactoryBot.create(:user)
     @discussion = FactoryBot.create(:discussion)
