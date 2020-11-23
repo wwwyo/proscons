@@ -1,123 +1,122 @@
-# database design
+# アプリ概要
+## [Proscons](https://proscons118.herokuapp.com/)
+※PC向けのサイト(スマートフォンでも閲覧可能)
 
-## users table
+"Proscons"という「投票型の掲示板アプリ」です。<br>
+"pros"は長所や賛成、"cons"は短所や反対の意味。
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| email           | string  | null: false |
-| password        | string  | null: false |
-| nickname        | string  | null: false |
+このサービスでは
+- 賛成派・反対派のチーム制度
+- 票の動きを可視化、変更も可能なフラットな投票制度
 
-### Association
+を用いることで、自分の考えを自信を持って主張できなかった人をサポートします。
 
-- has_many :ballot_boxes
-- has_many :votes
-- has_many :rooms, through: :user_rooms
-- has_many :user_rooms
-- has_many :discussions
-- has_many :likes
+◇ トップ右下からテストユーザーログインも可能ですので、自由にお試しください
 
-## ballot_boxes table
+<br>
 
-| Column     | Type          | Options                         |
-| ---------- | ------------- | ------------------------------- |
-| question   | string        | null: false                     |
-| detail     | text          |                                 |
-| supplement | text          |                                 |
-| user_id    | references    | null: false, foreign_key: true  |
+# 使用技術
+### フロントエンド
+- HTML/CSS 
+- JavaScript 
+- bootstrap4.5
 
-### Association
+### バックエンド
+- Ruby on Rails6.0
 
-- belongs_to :user
-- has_many :tags, through: :ballot_tags
-- has_many :ballot_tags
-- has_many :votes
-- has_one :room
+### テスト
+- Rspec
+- Capybara
 
-## tags table
+### データベース
+- MySQL
 
-| Column | Type   | Options                       |
-| ------ | ------ | ----------------------------- |
-| name   | string | null: false, uniqueness: true |
+### 開発環境
+- MacOS 
+- VScode
+- Git/GitHub
 
-### Association
+<br>
 
-- has_many :ballot_boxes, through: :ballot_tags
-- has_many :ballot_tags
+### インフラにAWSを導入中
 
-## ballot_tags table
+<br>
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| ballot_box_id | references | null: false, foreign_key: true |
-| tag_id        | references | null: false, foreign_key: true |
+# 機能一覧
+### ユーザー機能
+- ユーザー登録
+- テストユーザーログイン
 
-### Association
+<br>
 
-- belongs_to :ballot_box
-- belongs_to :tag
+### 投票箱作成機能
+- 投稿(タイトル, 詳細, タグ(非同期))
+- 編集(補足説明)
+- 削除
+- 一覧表示(最新, 人気)、詳細表示
+- タグ検索(最新検索, 人気検索)
 
-## votes table
+<br>
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| result        | boolean    | null: false                    |
-| user_id       | references | null: false, foreign_key: true |
-| ballot_box_id | references | null: false, foreign_key: true |
+### 投票機能
+- 投票(賛成・反対)
+- 投票の変更
 
-### Association
+<br>
 
-- belongs_to :user
-- belongs_to :ballot_box
+### チャンネル管理機能
+- 参加、退出
 
-## rooms table
+<br>
 
-| Column        | Type       | Options                         |
-| ------------- | ---------- | ------------------------------- |
-| ballot_box_id | references | null: false, foreign_key: true  |
+### コメント機能
+- 投稿(非同期)
 
-### Association
+<br>
 
-- has_many :users, through: :user_rooms
-- has_many :user_rooms
-- has_many :discussions
-- belongs_to :ballot_box
+### いいね機能
+- コメントにいいね(非同期)
+- いいねを削除(非同期)
 
-## user_rooms table
+<br>
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| room_id | references | null: false, foreign_key: true |
 
-### Association
+### その他
+- テスト(単体テスト・統合テスト, example:131)
 
-- belongs_to :user
-- belongs_to :room
+<br>
 
-## discussions table
+# ER図
 
-| Column      | Type       | Options                        |
-| ----------- | ---------  | ------------------------------ |
-| comment     | text       | null: false                    |
-| vote_result | boolean    | null: false                    |
-| user_id     | references | null: false, foreign_key: true |
-| room_id     | references | null: false, foreign_key: true |
+<p><img src="app/assets/images/ER-proscons.png" alt="ER図"/></p>
 
-### Association
+<br>
 
-- belongs_to :user
-- belongs_to :room
-- has_many :likes
+# アプリ詳細
+## URL
+https://proscons118.herokuapp.com/
+## 目的
+私たちは日常的に大量の意思決定を行っています。その中でも自分以外の多数の人と意思決定をする機会にストレスを抱えることが多くあると感じました。<br>
 
-## likes table
+[1. よくわからないまま、周りに流されてしまうこと]
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| user_id       | references | null: false, foreign_key: true |
-| discussion_id | references | null: false, foreign_key: true |
+[2. 他人を尊重するあまり自分の意見を言えない]
 
-### Association
+[3. 多数決によって自分の主張が通らない]
 
-- belongs_to :user
-- belongs_to :discussion
+こう言った背景から情報を文面として残すことでじっくり考えられる、２択の選択肢で気軽に意思表示ができる、さらに主張の質によって投票の重さが変わる場があればいいと思い制作に至りました.
+
+<br>
+
+## こだわり
+- 賛成と反対を分けた非同期コミュニケーション
+- いいねの獲得数に応じた投票数の変化
+- 利用が直感的にわかるようなボタン配置、アイコンの使用
+- GitHubにおけるPRやIssueの活用
+- Commitやbranchに英語を使用
+
+<br>
+
+# About me
+現在21歳。大阪の大学三回生ですが、休学してプログラミングを勉強しています。<br>
+直近の目標としてインターンに参加するためのポートフォリオの作成・改善を行っています。
