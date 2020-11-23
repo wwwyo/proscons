@@ -12,4 +12,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  devise_scope :user do
+    post 'sessions/guest_sign_in', to: 'sessions#new_guest'
+  end
 end

@@ -11,4 +11,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :password, format: { with: /\A[A-z0-9]+\z/ }
+
+  def self.guest
+    find_or_create_by!(nickname: 'test_user', email: 'test@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
 end
