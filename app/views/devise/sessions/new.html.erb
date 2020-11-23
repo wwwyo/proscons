@@ -1,25 +1,23 @@
 <div class="bg-light " style="width: 100vw; height: 100vh;">
   <div style="padding:7% 15%; 0">
-    <h1 class="border-bottom pb-2" style="width:90%;">Prosconsにログイン</h1>
+    <h1 class="border-bottom pb-2" style="width: 85%;">Prosconsにログイン</h1>
     <div class="text-danger mb-4">
       <%= flash[:notice] %>
       <%= flash[:alert] %>
     </div>
     <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-      <div class="form-group mt-3" style="width:80%">
-        <%= f.label :email, 'メールアドレス' %>
-        <%= f.email_field :email, class: "form-control", id: "email", aria_describedby: "emailHelp", placeholder: "メールアドレス" %>
+      <div class="form-group mt-4 border-bottom" style="width:70%">
+        <%= f.email_field :email, class: "form-control bg-light", id: "email", aria_describedby: "emailHelp", placeholder: "メールアドレス", style:"border: none;" %>
       </div>
-      <div class="form-group mt-3" style="width:80%">
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class: "form-control", id: "password", placeholder:"パスワード" %>
+      <div class="form-group mt-4 border-bottom" style="width:70%">
+        <%= f.password_field :password, class: "form-control bg-light", id: "password", placeholder:"パスワード", style:"border: none;" %>
       </div>
-      <%= f.submit 'ログイン', class:"btn btn-primary mt-3", style:"width: 30%;" %>
+      <%= f.submit 'ログイン', class:"btn btn-primary mt-3", style:"width: 25%;" %>
       <div class="mt-4">
         <%= link_to "新しいアカウントを作成", new_user_registration_path %>
       </div>
       <div class="mt-1">
-      <%= link_to "ゲストログイン", ballot_boxes_path, class: "btn btn-light pl-0", style: "text-decoration: none;"%>
+      <%= link_to "テストユーザーログイン(閲覧用)", sessions_guest_sign_in_path, method: :post, class: "btn btn-light pl-0", style: "text-decoration: none;"%>
       </div>
     <% end %>
   </div>
