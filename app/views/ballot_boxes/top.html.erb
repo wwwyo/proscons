@@ -1,7 +1,7 @@
 <div class="bg-light" style="width: 100vw; height: 100vh;">
   <div style="padding:5% 15% 0;">
-    <h1 class="display-2" style="font-family:Hiragino Mincho ProN;">Proscons</h1>
-    <h1 class="display-2" style="font-family:Hiragino Mincho ProN;">respect you will</h1>
+    <h1 class="display-3" style="font-family:Hiragino Mincho ProN;">Proscons</h1>
+    <h1 class="display-3" style="font-family:Hiragino Mincho ProN;">respect you will</h1>
     <p class="lead mt-4 pb-3 border-bottom">Prosconsはあなたの意思を尊重します</p>
   
   <div class="mt-5">
@@ -11,9 +11,9 @@
     <div class="mt-2">
       <%= link_to "ログイン", new_user_session_path, class: "btn btn-light btn-lg pl-0 border-bottom", style: "text-decoration: none;" %>
     </div>
-    <div class="mt-2">
+    <div class="mt-2 d-flex justify-content-between">
       <%= link_to "ゲストログイン", ballot_boxes_path, class: "btn btn-light btn-lg pl-0 border-bottom", style: "text-decoration: none;"%>
+      <%= link_to "テストユーザーログイン(閲覧用)", sessions_guest_sign_in_path, method: :post, class: "btn btn-light btn-lg pl-0 border-bottom" %>
     </div>
   </div>
-  <div>
 </div>

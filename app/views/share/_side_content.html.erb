@@ -17,6 +17,7 @@
         <div class="dropdown-menu">
           <%= link_to "ログイン", new_user_session_path, class: "dropdown-item" %>
           <%= link_to "アカウント作成",new_user_registration_path, class: "dropdown-item" %>
+          <%= link_to "テストユーザーログイン(閲覧用)", sessions_guest_sign_in_path, method: :post, class: "dropdown-item" %>
         </div> 
       <% end %>
     </div>

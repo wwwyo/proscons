@@ -1,27 +1,23 @@
 <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
   <div class="bg-light" style="width: 100vw; height: 100vh;">
-    <div style="padding:5% 15% 0;">
+    <div style="padding:5% 15% 0; width: 90%;">
       <h1 class="border-bottom pb-2">アカウント作成</h1>
       <%= render "share/errors_messages", model: f.object %>
-      <div class="form-group mt-2" style="width:90%;">
-        <%= f.label :nickname, 'ニックネーム' %>
-        <%= f.text_field :nickname, class: "form-control", id: "nickname", placeholder: "ご利用時に表示されます", maxlength: "15" %>
+      <div class="form-group mt-4 border-bottom" style="width: 80%;">
+        <%= f.text_field :nickname, class: "form-control bg-light", id: "nickname", placeholder: "ニックネーム", maxlength: "15", style:"border: none;" %>
       </div>
-      <div class="form-group mt-2" style="width:90%;">
-        <%= f.label :email, 'メールアドレス' %>
-        <%= f.email_field :email, class: "form-control", id: "email", aria_describedby: "emailHelp", placeholder: "PC/携帯どちらでも可" %>
+      <div class="form-group mt-2  border-bottom" style="width: 80%;">
+        <%= f.email_field :email, class: "form-control bg-light", id: "email", aria_describedby: "emailHelp", placeholder: "メールアドレス", style:"border: none;"  %>
       </div>
-      <div class="form-group mt-2" style="width:90%;">
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class: "form-control", id: "password", placeholder: "6文字以上の半角英数字" %>
+      <div class="form-group mt-2 border-bottom" style="width: 80%;">
+        <%= f.password_field :password, class: "form-control bg-light", id: "password", placeholder: "パスワード(6文字以上)", style: "border: none;" %>
       </div>
       <%=f.submit '登録', class:"btn btn-primary mt-2", style:"width: 30%;" %>
-      <div class="mt-3">
-        <%= link_to "ログインする", new_user_session_path %>
+      <div class="mt-4">
+        <%= link_to "既にアカウントをお持ちの方", new_user_session_path %>
       </div>
       <div class="mt-1">
-      <%= link_to "ゲストログイン", ballot_boxes_path, class: "btn btn-light pl-0", style: "text-decoration: none;"%>
-      </div>
+      <%= link_to "テストユーザーログイン(閲覧用)", sessions_guest_sign_in_path, method: :post, class: "btn btn-light pl-0", style: "text-decoration: none;"%>
     </div>
   </div>
 <% end %>
