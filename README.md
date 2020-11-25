@@ -1,8 +1,8 @@
-# アプリ概要
+# 概要
 ## [Proscons](https://proscons118.herokuapp.com/)
 ※PC向けのサイト(スマートフォンでも閲覧可能)
 
-"Proscons"という「投票型の掲示板アプリ」です。<br>
+"Proscons"という「投票型の掲示板サイト」です。<br>
 "pros"は長所や賛成、"cons"は短所や反対の意味。
 
 このサービスでは
@@ -69,7 +69,7 @@
 
 <p><img src="app/assets/images/ER-proscons.png" alt="ER図"/></p>
 
-# アプリ詳細
+# サイト詳細
 ## URL
 https://proscons118.herokuapp.com/
 ## 目的
