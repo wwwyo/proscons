@@ -11,11 +11,12 @@ class BallotBoxesController < ApplicationController
   end
 
   def index
-    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: { tag_id: @search.result.ids }).order(created_at: :desc)
+    @ballot_boxes = BallotBox.search(@search).includes(ballot_tags: :tag).order(created_at: :desc)
   end
 
   def popular
-    @ballot_boxes = BallotBox.includes(ballot_tags: :tag).joins(:ballot_tags, :votes).group('ballot_boxes.id').preload(:ballot_tags).where(ballot_tags: { tag_id: @search.result.ids }).order(Arel.sql('count(ballot_boxes.id) desc'))
+    vote = Vote.group(:ballot_box_id).order('count(ballot_box_id) desc').pluck(:ballot_box_id)
+    @ballot_boxes = BallotBox.search(@search).includes(ballot_tags: :tag).order(['field(`ballot_boxes`.`id`, ?)', vote])
   end
 
   def new
