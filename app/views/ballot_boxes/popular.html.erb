@@ -2,7 +2,7 @@
   <div class="row" style="height: 100vh; width: 100vw;">
     <%= render partial:"share/side_content", locals: {user_rooms: @user_rooms} %>
     <div class="col-9" style="height: 100vh;">
-      <div class="row border-bottom bg-light" style="height: 6%;">
+      <div class="row border-bottom bg-light" style="height: 6%; overflow: scroll;">
         <div class="container m-0 d-flex align-items-center justify-content-between">
           <%= search_form_for @search, url: popular_ballot_boxes_path do |f| %>
             <div class="d-flex" style="width:50vw;">
