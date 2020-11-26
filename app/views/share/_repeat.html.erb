@@ -1,4 +1,4 @@
-<% @ballot_boxes.each do |ballot_box| %>
+<% ballot_boxes.each do |ballot_box| %>
   <div class="my-4 border-bottom ballot_box"style="width:100%;">
     <h5 class="mb-0"><b><%= ballot_box.question %></b></h5>
     <p class="mb-0" style="font-size: 50%;"><%= "作成日：#{ballot_box.created_at.strftime('%Y/%m/%d')}" %></p>
