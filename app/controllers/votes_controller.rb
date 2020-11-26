@@ -2,11 +2,11 @@ class VotesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    vote = Vote.new(vote_params)
-    if vote.save
+    unless Vote.find_by(user_id: current_user.id, ballot_box_id: params[:ballot_box_id])
+      vote = Vote.create(vote_params)
       UserRoom.create(user_id: current_user.id, room_id: vote.ballot_box.id)
-      redirect_to ballot_box_rooms_path(params[:ballot_box_id])
     end
+    redirect_to ballot_box_rooms_path(params[:ballot_box_id])
   end
 
   def update
