@@ -1,5 +1,5 @@
 # 概要
-## [Proscons](https://proscons118.herokuapp.com/)
+## [Proscons](https://proscons.gq/)
 ※PC向けのサイト(スマートフォンでも閲覧可能)
 
 "Proscons"という「投票型の掲示板サイト」です。<br>
@@ -28,6 +28,11 @@
 
 ### データベース
 - MySQL
+
+### 本番環境
+- AWS(EC2, route53)
+- Nginx
+- Capistrano
 
 ### 開発環境
 - MacOS 
@@ -70,8 +75,10 @@
 <p><img src="app/assets/images/ER-proscons.png" alt="ER図"/></p>
 
 # サイト詳細
+
 ## URL
-https://proscons118.herokuapp.com/
+https://proscons.gq/
+
 ## 目的
 私たちは日常的に大量の意思決定を行っています。その中でも自分以外の多数の人と意思決定をする機会にストレスを抱えることが多くあると感じました。<br>
 
