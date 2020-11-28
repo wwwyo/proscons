@@ -1,4 +1,7 @@
 server '18.176.26.139', user: 'ec2-user', roles: %w{app db web}
+ActionCable.server.config.disable_request_forgery_protection = true
+config.action_cable.url = 'ws://18.176.26.139/cable'
+config.action_cable.allowed_request_origins = [ 'http://18.176.26.139' ]   
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
