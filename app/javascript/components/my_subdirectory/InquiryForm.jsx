@@ -26,7 +26,7 @@ const InquiryForm = (props) => {
         "お名前:" + props.name + '\n' +
         "内容:" + description
       }
-    const url = "https://hooks.slack.com/services/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"
+    const url = "https://hooks.slack.com/services/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"
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(payload),
