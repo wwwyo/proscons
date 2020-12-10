@@ -21,6 +21,17 @@
               <br>
               <br>*コメントのいいねが10を超えると投票数が増えます
             </p>
+            <div class="mt-3 dropeown-item d-flex justify-content-center">
+              <%= react_component(
+                "my_subdirectory/InquiryForm",
+                name: 
+                if (user_signed_in?)
+                  current_user.nickname
+                else
+                  "guest"
+                end
+              ) %>
+            </div>
           </div>
         </div>
       </div>
