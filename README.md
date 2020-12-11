@@ -17,6 +17,7 @@
 ### フロントエンド
 - HTML/CSS 
 - JavaScript 
+- React
 - bootstrap4.5
 
 ### バックエンド
@@ -66,6 +67,9 @@
 ### いいね機能
 - コメントにいいね(非同期)
 - いいねを削除(非同期)
+
+### お問い合わせ機能
+- slack(incoming webhooks)
 
 ### その他
 - テスト(単体テスト・統合テスト, example:131)
