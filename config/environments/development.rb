@@ -67,4 +67,7 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
   end
+
+  # 追加
+  config.webpacker.check_yarn_integrity = false
 end
