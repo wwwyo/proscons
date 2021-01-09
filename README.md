@@ -31,11 +31,13 @@
 - MySQL
 
 ### 本番環境
-- AWS(EC2, route53)
+- AWS(EC2, route53, ACM)
 - Nginx
+- Unicorn
 - Capistrano
 
 ### 開発環境
+- Docker/Docker-compose(Nginx, Puma, MySQL)
 - MacOS 
 - VScode
 - Git/GitHub
