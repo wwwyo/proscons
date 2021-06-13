@@ -13,6 +13,9 @@
 
 ◇ トップ右下からテストユーザーログインも可能ですので、自由にお試しください
 
+<p><img src="app/assets/images/image_1.png" alt="イメージ画像"/></p>
+<p><img src="app/assets/images/image_2.png" alt="イメージ画像"/></p>
+
 # 使用技術
 ### フロントエンド
 - HTML/CSS 
